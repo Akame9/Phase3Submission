@@ -1,7 +1,7 @@
 package com.example.userapplication.userapp.controllers;
 
 import com.example.userapplication.userapp.model.companyEntity;
-import com.example.userapplication.userapp.repository.companyRepository;
+import com.example.userapplication.userapp.services.companyServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,10 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class companyController {
 
     @Autowired
-    companyRepository companyrepo;
+    private companyServices companyservices;
+
+  //  @Autowired
+  //  companyRepository companyrepo;
+    
 
     @RequestMapping(value = "/company", method = RequestMethod.POST)
-    public void createCompany(@RequestBody companyEntity company){
-        companyrepo.save(company);
+    public String createCompany(@RequestBody companyEntity company){
+        companyservices.insertCompany(company);
+        return "Inserted";
+
     }
 }

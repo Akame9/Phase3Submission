@@ -127,6 +127,7 @@ public class companyEntity {
     }
     public companyEntity(String companyName, String ceo, String boardOfDirectors, double turnover,
             String companyBrief) {
+        
         this.companyName = companyName;
         this.ceo = ceo;
         this.boardOfDirectors = boardOfDirectors;
