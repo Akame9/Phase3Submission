@@ -16,6 +16,12 @@ public class companyServices {
         companyrepository.save(company);
     }
 
+    public companyEntity companyInfo(String companyName){
+
+        companyEntity company = companyrepository.findBycompanyName(companyName);
+        return company;
+    }
+
     
 
 }

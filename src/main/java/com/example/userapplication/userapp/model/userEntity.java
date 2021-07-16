@@ -57,7 +57,7 @@ public class userEntity {
         this.admin = admin;
     }
 
-    protected userEntity(){
+    public userEntity(){
         
     }
     public userEntity(String username, String password, String email, boolean admin) {
