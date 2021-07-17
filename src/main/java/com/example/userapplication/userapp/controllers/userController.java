@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class userController {
@@ -68,9 +69,23 @@ public class userController {
 
     @RequestMapping(value = "/searchbycompany/{companyName}",method = RequestMethod.GET)
     @ResponseBody
-    public companyEntity searchByCompany(@PathVariable String companyName){
+    public String searchByCompany(@PathVariable String companyName){
 
-        return companyservices.companyInfo(companyName);
+        String uri = "http://localhost:8080/companydetails/"+companyName;
+	    RestTemplate restTemplate = new RestTemplate();
+	    String result = restTemplate.getForObject(uri, String.class);
+	    return result;
+        
+    }
+
+    @RequestMapping(value = "/viewipo",method = RequestMethod.GET)
+    public String viewIpo(){
+
+        String uri = "http://localhost:8080/ipodetails/";
+	    RestTemplate restTemplate = new RestTemplate();
+	    String result = restTemplate.getForObject(uri, String.class);
+	    return result;
+        
     }
     
     

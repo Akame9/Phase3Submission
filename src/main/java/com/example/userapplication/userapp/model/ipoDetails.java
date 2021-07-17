@@ -82,7 +82,7 @@ public class ipoDetails {
         this.stockexchange = stockexchange;
     }
 
-    protected ipoDetails(){
+    public ipoDetails(){
         
     }
     public ipoDetails(double pricePerShare, Long totalNumberOfShare, LocalDateTime openDateTime) {

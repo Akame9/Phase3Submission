@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,9 +36,9 @@ public class companyController {
 
     }
 
-    @RequestMapping(value = "/companydetails",method = RequestMethod.GET)
+    @RequestMapping(value = "/companydetails/{companyName}",method = RequestMethod.GET)
     @ResponseBody
-    public companyEntity companyDetails(@RequestParam("companyName") String companyName){
+    public companyEntity companyDetails(@PathVariable String companyName) {
       return companyservices.companyInfo(companyName);
         
     }
