@@ -42,4 +42,5 @@ public class companyController {
       return companyservices.companyInfo(companyName);
         
     }
+
 }

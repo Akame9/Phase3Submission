@@ -26,8 +26,13 @@ public class ipoDetails {
     @Column(nullable = false)
     private Long totalNumberOfShare;
 
+    @Column(nullable = false)
     private LocalDateTime openDateTime;
 
+    @Column(nullable = false)
+    private String companyName;
+
+    
     @OneToOne(fetch = FetchType.LAZY)
     private companyEntity company;
 
@@ -40,6 +45,14 @@ public class ipoDetails {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public double getPricePerShare() {
@@ -85,11 +98,12 @@ public class ipoDetails {
     public ipoDetails(){
         
     }
-    public ipoDetails(double pricePerShare, Long totalNumberOfShare, LocalDateTime openDateTime) {
+    public ipoDetails(double pricePerShare, Long totalNumberOfShare, LocalDateTime openDateTime, String companyName) {
         super();
         this.pricePerShare = pricePerShare;
         this.totalNumberOfShare = totalNumberOfShare;
         this.openDateTime = openDateTime;
+        this.companyName = companyName;
     }
 
     

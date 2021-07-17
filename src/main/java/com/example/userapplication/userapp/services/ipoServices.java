@@ -14,8 +14,17 @@ public class ipoServices {
     @Autowired
     private ipoDetailsRepository iporepository;
 
+    public void addIpo(ipoDetails ipo){
+
+        iporepository.save(ipo);
+    }
+
     public List<ipoDetails> showIpo(){
         return iporepository.findAll();
+    }
+
+    public void deleteIpo(Long ipoId){
+        iporepository.deleteById(ipoId);
     }
     
 }
