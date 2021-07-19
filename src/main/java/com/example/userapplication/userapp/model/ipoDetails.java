@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "ipoDetails")
 public class ipoDetails {
@@ -34,6 +36,7 @@ public class ipoDetails {
 
     
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private companyEntity company;
 
     @ManyToMany

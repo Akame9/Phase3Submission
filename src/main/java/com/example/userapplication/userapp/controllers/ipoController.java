@@ -30,6 +30,7 @@ public class ipoController {
         String uri = "http://localhost:8080/companydetails/"+ipo.getCompanyName();
 	    RestTemplate restTemplate = new RestTemplate();
 	    companyEntity company = restTemplate.getForObject(uri, companyEntity.class);
+        //check for null company
         ipo.setCompany(company);
         iposervices.addIpo(ipo);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(ipo.getId()).toUri();

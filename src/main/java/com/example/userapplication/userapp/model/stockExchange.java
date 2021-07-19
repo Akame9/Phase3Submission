@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "stockExchange")
 public class stockExchange {
@@ -20,6 +22,7 @@ public class stockExchange {
     private String stockExchangeBrief;
 
     @OneToMany(targetEntity = companyStockExchangeMap.class)
+    @JsonIgnore
     private List<companyStockExchangeMap> companystockexchangemap;
 
     public Long getId() {

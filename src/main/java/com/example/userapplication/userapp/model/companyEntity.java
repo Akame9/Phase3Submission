@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "companyEntity")
 public class companyEntity {
@@ -36,14 +38,42 @@ public class companyEntity {
 
     private String companyBrief;
 
-    @OneToMany(targetEntity = companyStockExchangeMap.class)
+    private String sectorName;
+
+    @OneToMany(targetEntity = companyStockExchangeMap.class, mappedBy = "company")
+    @JsonIgnore
     private List<companyStockExchangeMap> companystockexchangemap;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private sector sector;
 
+    @OneToMany(targetEntity = stockPrice.class, mappedBy = "company")
+    @JsonIgnore
+    private List<stockPrice> stockprice;
+
+    
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "company",cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private ipoDetails ipodetails;
+
+    public List<stockPrice> getStockprice() {
+        return stockprice;
+    }
+
+
+    public void setStockprice(List<stockPrice> stockprice) {
+        this.stockprice = stockprice;
+    }
+
+    public String getSectorName() {
+        return sectorName;
+    }
+
+
+    public void setSectorName(String sectorName) {
+        this.sectorName = sectorName;
+    }
 
     public ipoDetails getIpodetails() {
         return ipodetails;
@@ -126,13 +156,14 @@ public class companyEntity {
 
     }
     public companyEntity(String companyName, String ceo, String boardOfDirectors, double turnover,
-            String companyBrief) {
+            String companyBrief, String sectorName) {
         
         this.companyName = companyName;
         this.ceo = ceo;
         this.boardOfDirectors = boardOfDirectors;
         this.turnover = turnover;
         this.companyBrief = companyBrief;
+        this.sectorName = sectorName;
     }
 
 }

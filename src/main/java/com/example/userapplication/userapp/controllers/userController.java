@@ -24,8 +24,6 @@ public class userController {
 
     @Autowired
     private userService userservice;
-    @Autowired
-    private companyServices companyservices;
     @CrossOrigin(origins = "http://localhost:3000")
 
 

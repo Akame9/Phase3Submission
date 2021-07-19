@@ -1,5 +1,7 @@
 package com.example.userapplication.userapp.services;
 
+import java.util.List;
+
 import com.example.userapplication.userapp.model.companyEntity;
 import com.example.userapplication.userapp.repository.companyRepository;
 
@@ -20,6 +22,17 @@ public class companyServices {
 
         companyEntity company = companyrepository.findBycompanyName(companyName);
         return company;
+    }
+
+    public List<companyEntity> companyList(){
+        List<companyEntity> companylist = companyrepository.findAll();
+        return companylist;
+    }
+
+    public companyEntity getcompany(Long companyId){
+
+        return companyrepository.getById(companyId);
+
     }
 
 }

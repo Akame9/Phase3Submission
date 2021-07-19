@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "stockPrice")
 public class stockPrice {
@@ -19,16 +21,17 @@ public class stockPrice {
     @GeneratedValue
     private Long id;
 
-    private double currentPrice;
+    private double sharePrice;
+    
     private Date date;
     private Time time;
-    private LocalDateTime localdatetime;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private companyEntity company;
 
     private String stockExchangeName;
-    private String stockCode;
+    private Long stockCode;
 
     public Long getId() {
         return id;
@@ -36,12 +39,14 @@ public class stockPrice {
     public void setId(Long id) {
         this.id = id;
     }
-    public double getCurrentPrice() {
-        return currentPrice;
+
+    public double getSharePrice() {
+        return sharePrice;
     }
-    public void setCurrentPrice(double currentPrice) {
-        this.currentPrice = currentPrice;
+    public void setSharePrice(double sharePrice) {
+        this.sharePrice = sharePrice;
     }
+   
     public Date getDate() {
         return date;
     }
@@ -54,12 +59,7 @@ public class stockPrice {
     public void setTime(Time time) {
         this.time = time;
     }
-    public LocalDateTime getLocaldatetime() {
-        return localdatetime;
-    }
-    public void setLocaldatetime(LocalDateTime localdatetime) {
-        this.localdatetime = localdatetime;
-    }
+    
     public companyEntity getCompany() {
         return company;
     }
@@ -72,22 +72,20 @@ public class stockPrice {
     public void setStockExchangeName(String stockExchangeName) {
         this.stockExchangeName = stockExchangeName;
     }
-    public String getStockCode() {
+    public Long getStockCode() {
         return stockCode;
     }
-    public void setStockCode(String stockCode) {
+    public void setStockCode(Long stockCode) {
         this.stockCode = stockCode;
     }
     protected stockPrice(){
         
     }
-    public stockPrice(double currentPrice, Date date, Time time, LocalDateTime localdatetime, companyEntity company,
-            String stockExchangeName, String stockCode) {
-        this.currentPrice = currentPrice;
+    public stockPrice(double sharePrice, Date date, Time time, LocalDateTime localdatetime, companyEntity company,
+            String stockExchangeName, Long stockCode) {
+        this.sharePrice = sharePrice;
         this.date = date;
         this.time = time;
-        this.localdatetime = localdatetime;
-        this.company = company;
         this.stockExchangeName = stockExchangeName;
         this.stockCode = stockCode;
     }
