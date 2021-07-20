@@ -26,5 +26,13 @@ public class ipoServices {
     public void deleteIpo(Long ipoId){
         iporepository.deleteById(ipoId);
     }
+
+    public ipoDetails getIpo(Long ipoId){
+
+        ipoDetails ipo =  iporepository.findById(ipoId).get();
+        return ipo;
+			
+    }
+
     
 }

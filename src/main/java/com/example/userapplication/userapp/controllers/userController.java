@@ -79,7 +79,7 @@ public class userController {
     @RequestMapping(value = "/viewipo",method = RequestMethod.GET)
     public String viewIpo(){
 
-        String uri = "http://localhost:8080/listipo/";
+        String uri = "http://localhost:8080/ipocontroller/listipo/";
 	    RestTemplate restTemplate = new RestTemplate();
 	    String result = restTemplate.getForObject(uri, String.class);
 	    return result;

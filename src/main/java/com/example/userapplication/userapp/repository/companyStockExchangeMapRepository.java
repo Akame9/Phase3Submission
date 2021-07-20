@@ -17,4 +17,8 @@ public interface companyStockExchangeMapRepository extends JpaRepository<company
 
     @Query(value = "SELECT company_Name FROM company_Stock_Exchange_Map WHERE stock_Exchange_Name=?1",nativeQuery = true)
     public List<String> findByStockExchangeName(String stockExchangeName);
+
+    @Query(value = "SELECT stock_Exchange_Name FROM company_Stock_Exchange_Map WHERE company_Name=?1",nativeQuery = true)
+    public List<String> findStockExchangeByCompanyName(String companyName);
+
 }

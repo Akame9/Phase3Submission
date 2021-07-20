@@ -3,8 +3,10 @@ package com.example.userapplication.userapp.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +26,9 @@ public class stockExchange {
     @OneToMany(targetEntity = companyStockExchangeMap.class)
     @JsonIgnore
     private List<companyStockExchangeMap> companystockexchangemap;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "stockexchange")
+    private List<ipoDetails> ipo;
 
     public Long getId() {
         return id;

@@ -39,6 +39,13 @@ public class companyStockExchangeMapServices {
         return cserepository.findByStockExchangeName(stockExchangeName);
 
     }
+
+    public List<String> getStockExchangeByCompany(String companyName){
+
+        return cserepository.findStockExchangeByCompanyName(companyName);
+
+    }
+
     
     
 }

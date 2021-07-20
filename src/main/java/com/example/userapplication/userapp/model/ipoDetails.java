@@ -1,6 +1,8 @@
 package com.example.userapplication.userapp.model;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,7 +31,10 @@ public class ipoDetails {
     private Long totalNumberOfShare;
 
     @Column(nullable = false)
-    private LocalDateTime openDateTime;
+    private Date date;
+
+    @Column(nullable = false)
+    private Time time;
 
     @Column(nullable = false)
     private String companyName;
@@ -39,8 +44,9 @@ public class ipoDetails {
     @JsonIgnore
     private companyEntity company;
 
-    @ManyToMany
-    private List<stockExchange> stockexchange;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<stockExchange> stockexchange = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -48,6 +54,22 @@ public class ipoDetails {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     public String getCompanyName() {
@@ -74,14 +96,6 @@ public class ipoDetails {
         this.totalNumberOfShare = totalNumberOfShare;
     }
 
-    public LocalDateTime getOpenDateTime() {
-        return openDateTime;
-    }
-
-    public void setOpenDateTime(LocalDateTime openDateTime) {
-        this.openDateTime = openDateTime;
-    }
-
     public companyEntity getCompany() {
         return company;
     }
@@ -101,12 +115,14 @@ public class ipoDetails {
     public ipoDetails(){
         
     }
-    public ipoDetails(double pricePerShare, Long totalNumberOfShare, LocalDateTime openDateTime, String companyName) {
+    public ipoDetails(double pricePerShare, Long totalNumberOfShare, Date date, Time time, String companyName) {
         super();
         this.pricePerShare = pricePerShare;
         this.totalNumberOfShare = totalNumberOfShare;
-        this.openDateTime = openDateTime;
+        this.date = date;
+        this.time = time;
         this.companyName = companyName;
+        
     }
 
     
