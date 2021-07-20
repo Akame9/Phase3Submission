@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
+import IpoAdd from './components/ManageIPO/IpoAdd';
+import IpoLists from './components/ManageIPO/IpoLists';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+      <div className="container">
+                    <Switch> 
+                          <Route path = "/" exact component = {IpoLists}></Route>
+                          <Route path = "/ipolists" component = {IpoLists}></Route>
+                          <Route path = "/add-ipo/:id" component = {IpoAdd}></Route>
+    
+                    </Switch>
+                </div>
+      </Router>
+      
     </div>
   );
 }
