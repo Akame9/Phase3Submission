@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Iposervices from '../../services/Iposervices';
 
-class IpoAdd extends Component {
+class IpoAddOrUpdate extends Component {
 
     constructor(props) {
         super(props)
@@ -80,9 +80,17 @@ class IpoAdd extends Component {
                 this.props.history.push('/ipolists');
             });
         }else{
-            Iposervices.updateipo(ipo, this.state.id).then( res => {
+            Iposervices.updateipo(this.state.id,ipo).then( res => {
                 this.props.history.push('/ipolists');
             });
+        }
+    }
+
+    getTitle(){
+        if(this.state.id === '_add'){
+            return <h3 className="text-center">Add IPO</h3>
+        }else{
+            return <h3 className="text-center">Update IPO</h3>
         }
     }
 
@@ -93,7 +101,9 @@ class IpoAdd extends Component {
                    <div className = "container">
                         <div className = "row">
                             <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                <h3>Add IPO</h3>
+                                {
+                                    this.getTitle()
+                                }
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group">
@@ -138,4 +148,4 @@ class IpoAdd extends Component {
     }
 }
 
-export default IpoAdd;
+export default IpoAddOrUpdate;

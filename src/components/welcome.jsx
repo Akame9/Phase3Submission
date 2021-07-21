@@ -26,7 +26,7 @@ class welcome extends Component {
                 <button className="btn btn-dark" onClick={this.signin.bind(this)}>login</button>
                 <button className="btn btn-dark" onClick={this.signup.bind(this)}>signup</button>
                 </p>
-                <div>
+                <div className="jumbotron text-center">
                     <h1>WELCOME TO STOCKMART</h1>
                     <h6>An online place for stock market charting</h6>
             

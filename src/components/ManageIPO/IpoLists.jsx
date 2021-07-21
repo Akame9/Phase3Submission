@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Iposervices from '../../services/Iposervices';
+import Admin from '../Admin';
 
 class IpoLists extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class IpoLists extends Component {
 
         this.addIpo = this.addIpo.bind(this);
         this.updateIpo = this.updateIpo.bind(this);
+        this.deleteIpo = this.deleteIpo.bind(this);
       }
 
     componentDidMount(){
@@ -27,9 +29,14 @@ class IpoLists extends Component {
         this.props.history.push(`/add-ipo/${id}`);
     }
 
+    deleteIpo(id){
+        this.props.history.push(`/delete-ipo/${id}`);
+    }
+
     render() {
         return (
             <div>
+                <Admin/>
                 <h2 className="text-center">IPO List</h2>
                 <div className = "row">
                     <button className="btn btn-primary" onClick={this.addIpo}> New IPO</button>
@@ -61,6 +68,9 @@ class IpoLists extends Component {
                                              <td> {se.stockExchangeName}</td>
                                              <td>
                                              <button onClick={ () => this.updateIpo(ipo.id)} className="btn btn-info"> Update </button>
+                                             </td>
+                                             <td>
+                                             <button onClick={ () => this.deleteIpo(ipo.id)} className="btn btn-danger"> Delete </button>
                                              </td>
                                         </tr>
 

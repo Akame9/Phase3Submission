@@ -43,7 +43,7 @@ class SignUp extends Component {
         console.log('user => ' + JSON.stringify(user));
 
         Userservices.signup(user).then(res =>{
-            this.props.history.push("/user");
+            this.props.history.push("/");
         });
     }
 

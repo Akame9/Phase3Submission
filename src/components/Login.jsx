@@ -7,7 +7,8 @@ class Login extends Component {
 
         this.state = {
                 username:'',
-                password:''
+                password:'',
+                valid:false
         }
 
         this.changeusernameHandler = this.changeusernameHandler.bind(this);
@@ -36,11 +37,16 @@ class Login extends Component {
         console.log('user => ' + JSON.stringify(user));
 
         Userservices.signin(user).then(res =>{
-            if(res){
-                this.props.history.push("/");
+            
+            if(res.data.admin){
+                this.props.history.push("/admin");
+            }
+            else if(res.data.admin==false){
+                //console.log(res)
+                this.props.history.push("/user/"+res.data.id);
             }
             else{
-                <p>wrong username or password</p>
+                this.setState({valid:true});    
             }
             
         });
@@ -68,7 +74,7 @@ class Login extends Component {
                                         </div>
                                         
                                         <button className="btn btn-success" onClick={this.signin}>Sign In </button>
-                                        
+                                        {this.state.valid && <p class="alert alert-danger" role="alert">wrong username or password</p>}
                                         <button type="button" className="btn btn-link" onClick={this.cancel.bind(this)} 
                                         style={{marginLeft: "300px"}}>cancel</button>
                                     </form>

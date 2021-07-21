@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
 
-class User extends Component {
+class Admin extends Component {
+
     constructor(props) {
         super(props)
 
         this.state = {
-
-          id: this.props.match.params.id
             
         }
 
       }
-    
-    
+
+    uploaddata(){
+        this.props.history.push('/uploaddata');
+    }
+
     ipo(){
         this.props.history.push('/ipolists');
         
     }
+
+
     render() {
         return (
-            <div >
-                
+            <div>
                 <div>
                 <nav className="navbar navbar-dark bg-dark">
                     <a className="navbar-brand" href="#">
-                    <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""/>
+                    <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" className="d-inline-block align-top" alt=""/>
                         StockMart
                     </a>
                 </nav>
@@ -43,13 +46,18 @@ class User extends Component {
       </li>
       <li className="nav-item">
         <a className="nav-link" href="#" style={{marginLeft: "50px"}}
-        onClick={this.ipo.bind(this)}>IPO</a>
+        onClick={this.uploaddata.bind(this)}>Import Data</a>
+      </li>
+
+      <li className="nav-item">
+        <a className="nav-link" href="#" style={{marginLeft: "50px"}}>Manage Company</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#" style={{marginLeft: "50px"}}>Compare Company</a>
+        <a className="nav-link" href="#" style={{marginLeft: "50px"}}>Manage Stock Exchange</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#" style={{marginLeft: "50px"}}>Compare Sector</a>
+        <a className="nav-link" href="#" style={{marginLeft: "50px"}}
+        onClick={this.ipo.bind(this)}>Manage IPO</a>
       </li>
       <li className="nav-item">
       <button className="btn btn-outline-dark" style={{marginLeft: "50px"}}>logout</button>
@@ -64,9 +72,11 @@ class User extends Component {
                 </div>
                 
                 
+
+                
             </div>
         );
     }
 }
 
-export default User;
+export default Admin;

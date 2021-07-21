@@ -13,18 +13,18 @@ class Iposervices {
     }
 
     updateipo(ipoId, newipo){
-        return axios.put(IPO_API_BASE_URL + "/updateipo/" + ipoId, newipo);
+        return axios.post(IPO_API_BASE_URL + "/updateipo/" + ipoId, newipo);
     }
 
     getIpoById(ipoId){
         return axios.get(IPO_API_BASE_URL + '/getipobyid/' + ipoId);
     }
 
-/*
-    deleteEmployee(employeeId){
-        return axios.delete(EMPLOYEE_API_BASE_URL + '/' + employeeId);
+
+    deleteipo(ipoId){
+        return axios.delete(IPO_API_BASE_URL + '/deleteipo/' + ipoId);
     }
-*/
+
     
 }
 
