@@ -1,5 +1,7 @@
 package com.example.userapplication.userapp.services;
 
+import java.util.List;
+
 import com.example.userapplication.userapp.model.sector;
 import com.example.userapplication.userapp.repository.sectorRepository;
 
@@ -24,6 +26,10 @@ public class sectorServices {
 
         sectorrepository.deleteById(sectorId);
 
+    }
+
+    public List<sector> getSector(){
+        return sectorrepository.findAll();
     }
 
     

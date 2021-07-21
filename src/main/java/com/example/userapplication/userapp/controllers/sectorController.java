@@ -29,9 +29,6 @@ public class sectorController {
     private sectorServices sectorservices;
 
     @Autowired
-    private companyServices companyservices;
-
-    @Autowired
     private stockPriceServices stockpriceservices;
 
 
@@ -90,6 +87,13 @@ public class sectorController {
 
         }
         return avg/count;
+
+    }
+
+    @RequestMapping(value = "/getsector", method = RequestMethod.GET)
+    public List<sector> getsectors(){
+
+        return sectorservices.getSector();
 
     }
 }
