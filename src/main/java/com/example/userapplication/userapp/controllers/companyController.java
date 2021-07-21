@@ -34,9 +34,6 @@ public class companyController {
     private companyServices companyservices;
 
     @Autowired
-    private companyStockExchangeMapServices cseservices;
-
-    @Autowired
     private stockPriceServices stockpriceservices;
 
     @RequestMapping(value = "/company", method = RequestMethod.POST)
@@ -107,5 +104,46 @@ public class companyController {
       return company.getIpodetails();
 
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/updatecompany/{companyId}",method = RequestMethod.PUT)
+    public ResponseEntity<companyEntity> updateCompany(@PathVariable Long companyId,
+    @RequestBody companyEntity newcompany){
+
+        companyEntity oldcompany = companyservices.getcompany(companyId);
+
+        oldcompany.setCompanyName(newcompany.getCompanyName());
+        oldcompany.setCeo(newcompany.getCeo());
+        oldcompany.setBoardOfDirectors(newcompany.getBoardOfDirectors());
+        oldcompany.setTurnover(newcompany.getTurnover());
+        oldcompany.setCompanyBrief(newcompany.getCompanyBrief());
+        oldcompany.setSectorName(newcompany.getSectorName());
+        String uri = "http://localhost:8080/sectordetails/"+oldcompany.getSectorName();
+	      RestTemplate restTemplate = new RestTemplate();
+	      sector sector = restTemplate.getForObject(uri, sector.class);
+        oldcompany.setSector(sector);
+        
+        companyservices.insertCompany(oldcompany);
+        
+        return ResponseEntity.ok(oldcompany);
+
+    }
+
+
+    @RequestMapping(value = "/getcompanybyid/{companyId}", method = RequestMethod.GET)
+    public companyEntity getCompanyById(@PathVariable Long companyId){
+
+      return companyservices.getcompany(companyId);
+
+    }
+
+    @RequestMapping(value = "/deletecompany/{companyId}", method = RequestMethod.DELETE)
+    public void deleteCompany(@PathVariable Long companyId){
+
+      companyservices.deleteCompany(companyId);
+
+    }
+
+    
 
 }

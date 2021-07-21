@@ -18,18 +18,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class userController {
 
     @Autowired
     private userService userservice;
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
 
 
     @RequestMapping(value = "/signup",method = RequestMethod.POST)
-    public String signup(@RequestBody userEntity user) throws AddressException, MessagingException{
+    public userEntity signup(@RequestBody userEntity user) throws AddressException, MessagingException{
 
+        String ADMIN_USERNAME = "Admin";
+        String ADMIN_PASSWORD = "admin";
+        if(user.getUsername().equals(ADMIN_USERNAME) && user.getPassword().equals(ADMIN_PASSWORD)){
+            user.setAdmin(true);
+        }
         userservice.createNewUser(user);
 
         HttpHeaders headers = new HttpHeaders();
@@ -37,25 +44,26 @@ public class userController {
         headers.add("Access-Control-Allow-Origin", "*");
 
         userservice.sendconfirmationmail(user.getId());
-        return user.toString();
+        return user;
     }
 
 
     @RequestMapping(value = "/confirmuser/{userId}",method = RequestMethod.GET)
-    public String welcomePage(@PathVariable Long userId ){
+    public ModelAndView welcomePage(@PathVariable Long userId ){
 
-        return "Welcome" + userservice.confirmed(userId);
+        userservice.confirmed(userId);
+        String uri = "http://localhost:3000/user/"+userId;
+        return new ModelAndView("redirect:"+uri);
+	    
+	    
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody userEntity user){
-        boolean registered = userservice.userLogin(user.getUsername(), user.getPassword());
-        if(registered){
-            return "Welcome";
-        }
-        else{
-            return "User Not Registered Yet Please Register";
-        }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.GET)
+    public userEntity login(@PathVariable("username") String username,
+    @PathVariable("password") String password){
+        userEntity registered = userservice.userLogin(username, password);
+        return registered;
     }
 
     /*

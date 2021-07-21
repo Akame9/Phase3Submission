@@ -33,7 +33,7 @@ public class userService {
         userEntity user = userrepository.getById(userId);
 
         final String USERNAME = "aathirapillai31469@gmail.com";
-        final String PASSWORD = "*****";
+        final String PASSWORD = "athu@2021";
         
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -68,19 +68,23 @@ public class userService {
 
     }
 
-    public String confirmed(Long userId){
+    public void confirmed(Long userId){
         userEntity user = userrepository.getById(userId);
         user.setConfirmed(true);
         userrepository.save(user);
-        return user.getUsername();
     }
 
-    public boolean userLogin(String username, String password){
+    public userEntity userLogin(String username, String password) throws NullPointerException{
         userEntity user = userrepository.findByUsername(username);
-        if(user==null){
-            return false;
+        
+        if(user.getPassword().equals(password) && user.isConfirmed()==true)
+        {
+            return user;    
         }
-        return user.isConfirmed();
+        else{
+            return null;
+        }
+        
     }
     
 }

@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/ipocontroller/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ipoController {
 
     @Autowired
@@ -65,13 +65,15 @@ public class ipoController {
         return iposervices.showIpo();
     }
 
+    //@CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/deleteipo/{ipoId}",method = RequestMethod.DELETE)
     public void deleteIpo(@PathVariable Long ipoId){
         iposervices.deleteIpo(ipoId);
     }
 
 
-    @RequestMapping(value = "/updateipo/{ipoId}",method = RequestMethod.PUT)
+    //@CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/updateipo/{ipoId}",method = RequestMethod.POST)
     public ResponseEntity<ipoDetails> updateIpo(@PathVariable Long ipoId,
     @RequestBody ipoDetails newipo){
 

@@ -31,7 +31,14 @@ public class companyServices {
 
     public companyEntity getcompany(Long companyId){
 
-        return companyrepository.getById(companyId);
+        companyEntity cmp = companyrepository.findById(companyId).get();
+        return cmp;
+
+    }
+
+    public void deleteCompany(Long companyId){
+
+        companyrepository.deleteById(companyId);
 
     }
 
