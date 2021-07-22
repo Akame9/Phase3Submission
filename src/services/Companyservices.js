@@ -24,6 +24,10 @@ class Companyservices {
         return axios.delete(COMPANY_API_BASE_URL + '/deletecompany/' + companyId);
     }
 
+    getstockprice(companyName, from, to){
+        return axios.get(COMPANY_API_BASE_URL + '/companystockprice/' + companyName + "/" + from + "/" + to);
+    }
+
 }
 
 export default new Companyservices();

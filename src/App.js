@@ -17,6 +17,8 @@ import SignUp from './components/SignUp';
 import User from './components/User';
 import welcome from './components/welcome';
 import SheetJSApp from './data/UploadExcel';
+import GenerateCharts from './components/Userview/GenerateCharts';
+import CompareCompany from './components/Userview/CompareCompany';
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
                           <Route path = "/add-sector" component = {SectorAdd}></Route>
                           <Route path = "/uploaddata" component = {SheetJSApp}></Route>
                           <Route path = "/admin" component = {Admin}></Route>
+                          <Route path = "/generatecharts" component = {GenerateCharts}></Route>
+                          <Route path = "/comparecompanies" component = {CompareCompany}></Route>
     
                     </Switch>
                   

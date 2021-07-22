@@ -30,7 +30,7 @@ class CompanyAddOrUpdate extends Component {
     componentDidMount(){
 
         if(this.state.id === '_add'){
-            return
+            //return
         }else{
             Companyservices.getCompanyById(this.state.id).then( (res) =>{
                 let company = res.data;
@@ -44,7 +44,13 @@ class CompanyAddOrUpdate extends Component {
 
                 });
             });
-        }        
+            
+        }
+        
+        Sectorservice.getse().then(res =>{
+            console.log(res)
+            this.setState({sector: res.data})
+        })
     }
 
 
@@ -99,11 +105,7 @@ class CompanyAddOrUpdate extends Component {
         }
     }
 
-    getSector(){
-        Sectorservice.getse().then(res =>{
-            this.setState({sector: res.data})
-        })
-    }
+    
 
     getTitle(){
         if(this.state.id === '_add'){
@@ -126,6 +128,7 @@ class CompanyAddOrUpdate extends Component {
                                 {
                                     this.getTitle()
                                 }
+                                
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group">
@@ -159,13 +162,12 @@ class CompanyAddOrUpdate extends Component {
                                         </div>
                                         <div className = "form-group">
                                         <label> Sector: </label>
-                                        <select class="form-control" value={this.state.sectorName} onChange={this.changesectorNameHandler}>
-                                            {
-                                                this.getSector()
-                                            }
+                                        <select class="form-control" >
+
+                                            
                                             {this.state.sector.map(
                                                 s =>
-                                                <option>{s.sectorName}</option>
+                                                <option value={this.state.sectorName=s.sectorName}>{s.sectorName}</option>
                                             )
                                             
                                             }

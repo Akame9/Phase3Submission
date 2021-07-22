@@ -7,6 +7,7 @@
 */
 import React from "react";
 import XLSX from "xlsx";
+import Stockpriceservices from "../services/Stockpriceservices";
 
 export default class SheetJSApp extends React.Component {
   constructor(props) {
@@ -25,13 +26,13 @@ export default class SheetJSApp extends React.Component {
     reader.onload = e => {
       /* Parse data */
       const bstr = e.target.result;
-      const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
+      const wb = XLSX.read(bstr, { type: (rABS ? "binary" : "array" ), cellDates:true, cellText:false});
       /* Get first worksheet */
       const wsname = wb.SheetNames[0];
       const ws = wb.Sheets[wsname];
       console.log(rABS, wb);
       /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      const data = XLSX.utils.sheet_to_json(ws, { header: 1, raw:false, dateNF:'yyyy-mm-dd' });
       console.log(JSON.stringify(data)+"this data needs to be passed to rest endpoint to save prices");
       /* Update state */
       this.setState({ data: data, cols: make_cols(ws["!ref"]) });
@@ -45,7 +46,33 @@ export default class SheetJSApp extends React.Component {
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
     /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, "sheetjs.xlsx");
+    //XLSX.writeFile(wb, "sheetjs.xlsx");
+    let i = 1
+    while(i<this.state.data.length){
+      if(this.state.data[i].length){
+       
+        Stockpriceservices.addsp(JSON.stringify({
+          stockCode: this.state.data[i][0].trim(),
+          stockExchangeName: this.state.data[i][1].trim(),
+          sharePrice: this.state.data[i][2].trim(),
+          date: this.state.data[i][3].trim(),
+          time: this.state.data[i][4].trim()
+        }))
+        
+
+      }
+      i++
+    }
+    <div className="alert alert-success" role="alert">
+    <h4 class="alert-heading">Data send</h4>
+    <button className="btn btn-primary" onClick={this.ok.bind(this)}>Ok</button>
+    </div>
+
+
+  }
+
+  ok(){
+    this.props.history.push('/admin');
   }
   render() {
     return (

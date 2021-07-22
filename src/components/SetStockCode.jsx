@@ -39,7 +39,12 @@ class SetStockCode extends Component {
         console.log('s => ' + JSON.stringify(s));
 
         Setstockcodeservice.addsc(s).then(res => {
-            this.props.history.push('/setstockcode');
+            //this.props.history.push('/setstockcode');
+            this.setState({
+                stockCode: '',
+                companyName: '',
+                stockExchangeName: ''
+            })
         });
     }
 
@@ -51,11 +56,11 @@ class SetStockCode extends Component {
                 <form class="form-inline">
                 <div class="form-group mx-sm-3 mb-2">
                 <input placeholder="stock code" name="stockCodeName" className="form-control" 
-                value={this.state.stockCode} onChange={this.changestockExchangeNameHandler}/>
+                value={this.state.stockCode} onChange={this.changestockCodeHandler}/>
                 </div>
                 <div class="form-group mx-sm-3 mb-2">
                     <input placeholder="company" name="companyName" className="form-control" 
-                    value={this.state.companyName} onChange={this.changestockExchangeNameHandler}/>
+                    value={this.state.companyName} onChange={this.changecompanyNameHandler}/>
                 </div>
                 <div class="form-group mx-sm-3 mb-2">
                     <input placeholder="stock exchange" name="stockExchangeName" className="form-control" 

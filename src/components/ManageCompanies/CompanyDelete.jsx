@@ -16,7 +16,7 @@ class CompanyDelete extends Component {
 
 
     delete(companyId){
-        Companyservices.deletecompany(companyId).then(res =>{
+        Companyservices.deleteCompany(companyId).then(res =>{
             this.props.history.push('/companylists');
         });
     }
