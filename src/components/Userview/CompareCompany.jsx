@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col,Container,Row, Card } from 'react-bootstrap';
 import Companyservices from '../../services/Companyservices';
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
@@ -70,15 +71,6 @@ class CompareCompany extends Component {
         this.setState({to: event.target.value});
     }
 
-    cancel(){
-        this.setState({
-            companyName: '',
-            stkex: '',
-            from:'',
-            to:''
-        })
-    }
-
     saveOrUpdateCompany = (e) => {
         e.preventDefault();
         let company = { companyName: this.state.companyName, 
@@ -119,54 +111,58 @@ class CompareCompany extends Component {
 
     render() {
         return (
-            <div>
-                <br></br>
-                   <div className = "container">
-                        <div className = "row">
-                            <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                <h3>Select Companies to Compare</h3>
+            <Container style={{marginTop:'80px'}}>
+            <Row>
+            <Col>
+                   <Card >
+                            
+                                <h3 className='text-center'>Select Company</h3>
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group">
-                                            <label> Company Name: </label>
+                                            <label style={{marginBottom:'5px'}}> Company Name: </label>
                                             <input placeholder="company name" name="companyName" className="form-control" 
-                                                value={this.state.companyName} onChange={this.changecompanyNameHandler}/>
+                                                style={{marginBottom:'5px'}} value={this.state.companyName} onChange={this.changecompanyNameHandler}/>
                                         </div>
                                         <div className = "form-group">
-                                        <label> Stock Exchange Name: </label>
+                                        <label style={{marginBottom:'5px'}}> Stock Exchange Name: </label>
                                             <input placeholder="stock exchange name" name="stkex" className="form-control" 
-                                                value={this.state.stkex} onChange={this.changestkexHandler}/>
+                                               style={{marginBottom:'5px'}} style={{marginBottom:'5px'}} value={this.state.stkex} onChange={this.changestkexHandler}/>
                                         
                                         
                                         </div>
                                         <div className = "form-group">
-                                            <label> From : </label>
+                                            <label style={{marginBottom:'5px'}}> From : </label>
                                             <input placeholder="from date" name="from" className="form-control" 
-                                                value={this.state.from} onChange={this.changefromHandler}/>
+                                                style={{marginBottom:'5px'}} value={this.state.from} onChange={this.changefromHandler}/>
                                         </div>
                                         <div className = "form-group">
-                                            <label> To : </label>
+                                            <label style={{marginBottom:'5px'}}> To : </label>
                                             <input placeholder="to date" name="to" className="form-control" 
-                                                value={this.state.to} onChange={this.changetoHandler}/>
+                                                style={{marginBottom:'5px'}} value={this.state.to} onChange={this.changetoHandler}/>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.saveOrUpdateCompany}>Generate Map</button>
-                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "300px"}}>Cancel</button>
+                                        <button className="btn btn-success" onClick={this.saveOrUpdateCompany} style={{margin:'10px'}}>Generate Map</button>
+                                        
                                     </form>
                                 </div>
-                            </div>
-                        </div>
+                    </Card>
+                        
 
-                   </div>
+                </Col>
+                <Col>
 
-                   <div className="input-group">
-								
-								{chartConfigs.Chart}</div>
+                   <Card>								
+								{chartConfigs.Chart}
 							 <ReactFC {...chartConfigs} />;
 
 
                 
-            </div>
+                    </Card>
+
+                </Col>
+            </Row>
+            </Container>
         );
     }
 }

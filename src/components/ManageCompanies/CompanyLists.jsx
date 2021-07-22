@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Companyservices from '../../services/Companyservices';
-import Admin from '../Admin';
+import {Button} from 'react-bootstrap';
 
 class CompanyLists extends Component {
     constructor(props) {
@@ -39,11 +39,9 @@ class CompanyLists extends Component {
         return (
             <div>
                 
-                <h2 className="text-center">Companies Listed</h2>
-                <div className = "row">
-                    <button className="btn btn-primary" onClick={this.addCompany}> New Company</button>
-                 </div>
-                <div className = "row">
+                <h3 className="text-center" style={{marginTop:'80px'}}>List of Companies</h3>
+                <Button  onClick={this.addCompany} size='sm' style={{margin:'10px',marginLeft:'50px'}}> New Company</Button> 
+                <div className = "container">
                         <table className = "table table-striped table-bordered">
 
                             <thead>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Companyservices from '../../services/Companyservices';
+import {Card} from 'react-bootstrap';
 
 class CompanyDelete extends Component {
 
@@ -23,13 +24,16 @@ class CompanyDelete extends Component {
 
     render() {
         return (
-            <div class="alert alert-success" role="alert">
+            <Card style={{width:'18rem',marginTop:'100px'}}>
+                <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading">Delete Company</h4>
                 <p>The Company data will be removed from the listing</p>
                 <hr/>
                 <button className="btn btn-primary" onClick={ () => this.delete(this.state.id) }>Ok</button>
   
-            </div>
+                </div>
+            </Card>
+
         );
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Iposervices from '../../services/Iposervices';
-import Admin from '../Admin';
+import {Button} from 'react-bootstrap';
 
 class IpoLists extends Component {
     constructor(props) {
@@ -36,12 +36,12 @@ class IpoLists extends Component {
     render() {
         return (
             <div>
-                <Admin/>
-                <h2 className="text-center">IPO List</h2>
-                <div className = "row">
-                    <button className="btn btn-primary" onClick={this.addIpo}> New IPO</button>
-                 </div>
-                <div className = "row">
+                
+                <h2 className="text-center" style={{marginTop:'80px'}}>IPO List</h2>
+                
+                <Button onClick={this.addIpo} size='sm' style={{margin:'10px',marginLeft:'50px'}}> New IPO</Button>
+                
+                <div className = "container">
                         <table className = "table table-striped table-bordered">
 
                             <thead>

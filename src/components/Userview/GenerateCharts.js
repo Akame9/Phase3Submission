@@ -55,6 +55,8 @@ class GenerateCharts extends Component {
 				this.dosearch = this.dosearch.bind(this);
 		
 		}
+
+        
 		
 	
 		dosearch(){

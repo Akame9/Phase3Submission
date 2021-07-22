@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Setstockcodeservice from '../services/Setstockcodeservice';
-
+import {Card, Button} from 'react-bootstrap';
 class SetStockCode extends Component {
 
     constructor(props) {
@@ -51,9 +51,10 @@ class SetStockCode extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Set Stock Code</h3>
-                <form class="form-inline">
+            <div className="container" style={{marginTop:"80px"}}>
+                
+                <Card style={{width:"18rem"}}>
+                <h3 className="text-center">Set Stock Code</h3>
                 <div class="form-group mx-sm-3 mb-2">
                 <input placeholder="stock code" name="stockCodeName" className="form-control" 
                 value={this.state.stockCode} onChange={this.changestockCodeHandler}/>
@@ -66,8 +67,8 @@ class SetStockCode extends Component {
                     <input placeholder="stock exchange" name="stockExchangeName" className="form-control" 
                     value={this.state.stockExchangeName} onChange={this.changestockExchangeNameHandler}/>
                 </div>
-                    <button type="submit" class="btn btn-primary mb-2" onClick={this.confirm}>Confirm</button>
-                </form>
+                    <Button onClick={this.confirm} style={{margin:'15px'}}>Confirm</Button>
+                </Card>
                 
             </div>
         );

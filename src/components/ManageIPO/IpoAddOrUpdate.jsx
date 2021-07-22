@@ -88,9 +88,9 @@ class IpoAddOrUpdate extends Component {
 
     getTitle(){
         if(this.state.id === '_add'){
-            return <h3 className="text-center">Add IPO</h3>
+            return <h3 className="text-center" >Add IPO</h3>
         }else{
-            return <h3 className="text-center">Update IPO</h3>
+            return <h3 className="text-center" >Update IPO</h3>
         }
     }
 
@@ -98,8 +98,8 @@ class IpoAddOrUpdate extends Component {
         return (
             <div>
                 <br></br>
-                   <div className = "container">
-                        <div className = "row">
+                   <div className = "container" style={{marginTop:"80px"}}>
+                   <div className = "row">
                             <div className = "card col-md-6 offset-md-3 offset-md-3">
                                 {
                                     this.getTitle()
@@ -134,16 +134,15 @@ class IpoAddOrUpdate extends Component {
 
                                         
 
-                                        <button className="btn btn-success" onClick={this.saveOrUpdateIpo}>Save</button>
-                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
+                                        <button className="btn btn-success" onClick={this.saveOrUpdateIpo} style={{marginTop:"10px"}}>Save</button>
+                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "380px", marginTop:'10px'}}>Cancel</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
-
-                   </div>
                 
-            </div>
+                    </div>
+                </div>
         );
     }
 }

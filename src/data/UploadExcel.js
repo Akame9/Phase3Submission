@@ -8,6 +8,7 @@
 import React from "react";
 import XLSX from "xlsx";
 import Stockpriceservices from "../services/Stockpriceservices";
+import { Card} from 'react-bootstrap';
 
 export default class SheetJSApp extends React.Component {
   constructor(props) {
@@ -76,6 +77,7 @@ export default class SheetJSApp extends React.Component {
   }
   render() {
     return (
+      <Card style={{margin:'auto',marginTop:'100px',width:'36rem'}}>
       <DragDropFile handleFile={this.handleFile}>
         <div className="row">
           <div className="col-xs-12">
@@ -84,7 +86,7 @@ export default class SheetJSApp extends React.Component {
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <button
+            <button style={{marginLeft:'485px'}}
               disabled={!this.state.data.length}
               className="btn btn-success"
               onClick={this.exportFile}
@@ -99,6 +101,7 @@ export default class SheetJSApp extends React.Component {
           </div>
         </div>
       </DragDropFile>
+      </Card>
     );
   }
 }
@@ -155,8 +158,11 @@ class DataInput extends React.Component {
   render() {
     return (
       <form className="form-inline">
-        <div className="form-group">
-          <label htmlFor="file">Spreadsheet</label>
+        
+        <Card.Title className="text-center" >Import Excel</Card.Title>
+        <Card.Body>
+          
+          <label htmlFor="file">Select Excel file to be uploaded</label>
           <input
             type="file"
             className="form-control"
@@ -164,7 +170,8 @@ class DataInput extends React.Component {
             accept={SheetJSFT}
             onChange={this.handleChange}
           />
-        </div>
+        </Card.Body>
+        
       </form>
     );
   }

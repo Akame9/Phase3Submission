@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Sectorservice from '../../services/Sectorservice';
+import {Button} from 'react-bootstrap';
 
 class SectorLists extends Component {
     constructor(props) {
@@ -26,11 +27,10 @@ class SectorLists extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Sectors</h2>
-                <div className = "row">
-                    <button className="btn btn-primary" onClick={this.addse}> New Sector</button>
-                 </div>
-                <div className = "row">
+                <h2 className="text-center" style={{marginTop:'80px'}}>Sectors</h2>
+                <Button onClick={this.addse} size='sm' style={{margin:'10px',marginLeft:'50px'}}> New Sector</Button>
+                 
+                <div className = "container">
                         <table className = "table table-striped table-bordered">
 
                             <thead>

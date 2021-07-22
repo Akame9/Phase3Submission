@@ -44,10 +44,10 @@ class SectorAdd extends Component {
         return (
             <div>
                  <br></br>
-                   <div className = "container">
+                   <div className = "container" style={{marginTop:'50px'}}>
                         <div className = "row">
                             <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                <h3>New Sector</h3>
+                                <h3 className="text-center">New Sector</h3>
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group">
@@ -62,8 +62,8 @@ class SectorAdd extends Component {
                                             
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.save}>Save</button>
-                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
+                                        <button className="btn btn-success" onClick={this.save} style={{marginTop: "10px"}}>Save</button>
+                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "380px", marginTop: "10px"}}>Cancel</button>
                                     </form>
                                 </div>
                             </div>

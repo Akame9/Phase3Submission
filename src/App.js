@@ -1,4 +1,5 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Admin from './components/Admin';
 import './App.css';
 import Login from './components/Login';
@@ -32,22 +33,8 @@ function App() {
                           <Route path = "/signup" exact component = {SignUp}></Route>
                           <Route path = "/signin" exact component = {Login}></Route>
                           <Route path = "/user/:id" exact component = {User}></Route>
-                          <Route path = "/ipolists" component = {IpoLists}></Route>
-                          <Route path = "/add-ipo/:id" component = {IpoAddOrUpdate}></Route>
-                          <Route path = "/delete-ipo/:id" component = {IpoDelete}></Route>
-                          <Route path = "/companylists" component = {CompanyLists}></Route>
-                          <Route path = "/add-company/:id" component = {CompanyAddOrUpdate}></Route>
-                          <Route path = "/delete-company/:id" component = {CompanyDelete}></Route>
-                          <Route path = "/selists" component = {StockExchangeLists}></Route>
-                          <Route path = "/add-se" component = {StockExchangeAdd}></Route>
-                          <Route path = "/setstockcode" component = {SetStockCode}></Route>
-                          <Route path = "/sectorlists" component = {SectorLists}></Route>
-                          <Route path = "/add-sector" component = {SectorAdd}></Route>
-                          <Route path = "/uploaddata" component = {SheetJSApp}></Route>
                           <Route path = "/admin" component = {Admin}></Route>
-                          <Route path = "/generatecharts" component = {GenerateCharts}></Route>
-                          <Route path = "/comparecompanies" component = {CompareCompany}></Route>
-    
+                             
                     </Switch>
                   
                 </div>

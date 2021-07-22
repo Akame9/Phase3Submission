@@ -122,7 +122,7 @@ class CompanyAddOrUpdate extends Component {
         return (
             <div>
                 <br></br>
-                   <div className = "container">
+                   <div className = "container" style={{marginTop:'50px'}}>
                         <div className = "row">
                             <div className = "card col-md-6 offset-md-3 offset-md-3">
                                 {
@@ -174,8 +174,8 @@ class CompanyAddOrUpdate extends Component {
                                         </select>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.saveOrUpdateCompany}>Save</button>
-                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "300px"}}>Cancel</button>
+                                        <button className="btn btn-success" onClick={this.saveOrUpdateCompany} style={{marginTop:"10px"}}>Save</button>
+                                        <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "380px",marginTop:"10px"}}>Cancel</button>
                                     </form>
                                 </div>
                             </div>

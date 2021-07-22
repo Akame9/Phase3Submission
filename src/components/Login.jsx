@@ -54,7 +54,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{backgroundColor:'blueviolet'}}>
                 <br></br>
                    <div className = "container">
                         <div className = "row">
