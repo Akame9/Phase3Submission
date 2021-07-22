@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class companyController {
 
@@ -35,6 +35,9 @@ public class companyController {
 
     @Autowired
     private stockPriceServices stockpriceservices;
+
+    @Autowired
+    private companyStockExchangeMapServices cseservices;
 
     @RequestMapping(value = "/company", method = RequestMethod.POST)
     public ResponseEntity<Object> createCompany(@RequestBody companyEntity company){
@@ -72,17 +75,16 @@ public class companyController {
       return company.getStockprice();
     }
 
-    @RequestMapping(value = "/companystockprice/{companyId}/{from}/{to}",method = RequestMethod.GET)
+    @RequestMapping(value = "/companystockprice/{companyName}/{from}/{to}",method = RequestMethod.GET)
     @ResponseBody
-    public List<stockPrice> companyStockPrice(@PathVariable("companyId") Long companyId,
+    public List<stockPrice> companyStockPrice(@PathVariable("companyName") String companyName,
     @PathVariable("from") Date from,@PathVariable("to") Date to){
 
-      companyEntity company = companyservices.getcompany(companyId);
-      //List<companyStockExchangeMap> stockcodes = company.getCompanystockexchangemap();
+      List<companyStockExchangeMap> stockcodes = cseservices.getstockcodes(companyName);
       
       List<stockPrice> sp = new ArrayList<>();
-      for(stockPrice stockp: company.getStockprice()){
-        List<stockPrice> stockprice = stockpriceservices.getStockPrice(stockp.getStockCode(), from, to);
+      for(companyStockExchangeMap stockp: stockcodes){
+        List<stockPrice> stockprice = stockpriceservices.getStockPrice(stockp.getStockCode(),from, to);
         sp.addAll(stockprice);
 
       }

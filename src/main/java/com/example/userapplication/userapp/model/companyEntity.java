@@ -40,7 +40,7 @@ public class companyEntity {
 
     private String sectorName;
 
-    @OneToMany(targetEntity = companyStockExchangeMap.class, mappedBy = "company")
+    @OneToMany(targetEntity = companyStockExchangeMap.class, mappedBy = "company",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<companyStockExchangeMap> companystockexchangemap;
 
@@ -48,7 +48,7 @@ public class companyEntity {
     @JsonIgnore
     private sector sector;
 
-    @OneToMany(targetEntity = stockPrice.class, mappedBy = "company")
+    @OneToMany(targetEntity = stockPrice.class, mappedBy = "company",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<stockPrice> stockprice;
 
