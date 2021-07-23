@@ -46,6 +46,11 @@ public class companyStockExchangeMapServices {
 
     }
 
+    public List<companyStockExchangeMap> showlists(){
+        List<companyStockExchangeMap> cse = cserepository.findAll();
+        return cse;
+    }
+
     
     
 }

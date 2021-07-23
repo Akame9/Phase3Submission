@@ -61,5 +61,14 @@ public class companyStockExchangeMapController {
         return cseservices.getstockcodes(companyName);
 
     }
+
+    @RequestMapping(value = "/getallstockcode", method = RequestMethod.GET)
+    @ResponseBody
+    public List<companyStockExchangeMap> viewall(){
+        List<companyStockExchangeMap> cse = cseservices.showlists();
+
+        return  cse;
+
+    }
     
 }

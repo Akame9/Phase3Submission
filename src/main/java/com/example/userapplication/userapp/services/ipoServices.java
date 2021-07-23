@@ -1,5 +1,6 @@
 package com.example.userapplication.userapp.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.example.userapplication.userapp.model.ipoDetails;
@@ -32,6 +33,10 @@ public class ipoServices {
         ipoDetails ipo =  iporepository.findById(ipoId).get();
         return ipo;
 			
+    }
+
+    public List<ipoDetails> getIpoFromAndTo(Date from, Date to){
+        return iporepository.findIpoFromAndTo(from, to);
     }
 
     

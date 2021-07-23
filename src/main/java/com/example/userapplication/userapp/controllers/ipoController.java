@@ -1,6 +1,7 @@
 package com.example.userapplication.userapp.controllers;
 
 import java.net.URI;
+import java.sql.Date;
 import java.util.List;
 
 import com.example.userapplication.userapp.model.companyEntity;
@@ -95,6 +96,13 @@ public class ipoController {
     public ipoDetails getIpoById(@PathVariable Long ipoId){
         return iposervices.getIpo(ipoId);
 
+    }
+
+    @RequestMapping(value = "/getipofromandto/{from}/{to}", method = RequestMethod.GET)
+    public List<ipoDetails> getIpoFromAndTo(@PathVariable("from") Date from, 
+    @PathVariable("to") Date to){
+
+        return iposervices.getIpoFromAndTo(from, to);
     }
     
 }

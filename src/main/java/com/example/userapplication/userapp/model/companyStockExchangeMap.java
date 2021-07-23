@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "companyStockExchangeMap")
 public class companyStockExchangeMap {
@@ -20,9 +22,11 @@ public class companyStockExchangeMap {
     private String stockExchangeName;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private companyEntity company;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private stockExchange stockExchange;
 
     public Long getId() {
