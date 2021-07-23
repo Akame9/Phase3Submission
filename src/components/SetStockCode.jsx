@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Setstockcodeservice from '../services/Setstockcodeservice';
-import {Card, Button} from 'react-bootstrap';
+import {Card, Button, Table, Container,Row,Col} from 'react-bootstrap';
 class SetStockCode extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
+            sc: [],
             stockCode: '',
             companyName: '',
             stockExchangeName: ''
@@ -15,7 +16,15 @@ class SetStockCode extends Component {
         this.changecompanyNameHandler = this.changecompanyNameHandler.bind(this);
         this.changestockCodeHandler = this.changestockCodeHandler.bind(this);
         this.confirm = this.confirm.bind(this);
+        this.getSC = this.getSC.bind(this);
         
+    }
+
+    componentDidMount(){
+        Setstockcodeservice.getsc().then(res => {
+            console.log(res);
+            this.setState({sc:res.data});
+        });
     }
 
     changestockExchangeNameHandler= (event) => {
@@ -38,22 +47,32 @@ class SetStockCode extends Component {
                 };
         console.log('s => ' + JSON.stringify(s));
 
-        Setstockcodeservice.addsc(s).then(res => {
-            //this.props.history.push('/setstockcode');
+        Setstockcodeservice.addsc(s).then(res =>{
+            console.log(res);
             this.setState({
                 stockCode: '',
                 companyName: '',
-                stockExchangeName: ''
-            })
+                stockExchangeName: ''});
         });
+
+        
+    }
+
+    getSC(){
+        Setstockcodeservice.getsc().then(res => {
+            console.log(res);
+            this.setState({sc:res.data});
+        });
+
     }
 
 
     render() {
         return (
-            <div className="container" style={{marginTop:"80px"}}>
-                
-                <Card style={{width:"18rem"}}>
+            <Container style={{marginTop:"80px"}}>
+                <Row>
+                    <Col xs={4}>
+                    <Card style={{width:"18rem"}}>
                 <h3 className="text-center">Set Stock Code</h3>
                 <div class="form-group mx-sm-3 mb-2">
                 <input placeholder="stock code" name="stockCodeName" className="form-control" 
@@ -70,7 +89,40 @@ class SetStockCode extends Component {
                     <Button onClick={this.confirm} style={{margin:'15px'}}>Confirm</Button>
                 </Card>
                 
-            </div>
+                </Col>
+
+                <Col xs={6}>
+                <Button onClick={this.getSC}>Refresh</Button>
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Stock Code</th>
+                        <th>Company</th>
+                        <th>Stock Exchange</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.sc.map(
+                            (s,i) =>
+                            <tr>
+                                <td>{i+1}</td>
+                                <td>{s.stockCode}</td>
+                                <td>{s.companyName}</td>
+                                <td>{s.stockExchangeName}</td>
+                            </tr>
+                        )
+                        
+                        }  
+                    </tbody>
+                    </Table>
+                
+                
+                </Col>
+                </Row>
+                
+                
+            </Container>
         );
     }
 }

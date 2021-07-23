@@ -15,6 +15,7 @@ import StockExchangeLists from './ManageStockExchange/StockExchangeLists';
 import SetStockCode from './SetStockCode';
 
 
+
 class Admin extends Component {
 
     constructor(props) {
@@ -37,7 +38,7 @@ class Admin extends Component {
           
           <img src="https://image.shutterstock.com/z/stock-vector-financial-logo-icon-1013745385.jpg" width="40px" height="40px" style={{marginLeft:"10px"}}/>
           {' '}
-          StockMark
+          StockMarT
         </Navbar.Brand>
 
         <Navbar.Toggle className="coloring" />

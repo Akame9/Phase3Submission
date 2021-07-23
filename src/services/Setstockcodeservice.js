@@ -8,6 +8,10 @@ class Setstockcodeservice {
         return axios.post(SC_API_BASE_URL+"/insertcse", sc);
     }
 
+    getsc(){
+        return axios.get(SC_API_BASE_URL+"/getallstockcode");
+    }
+
     
 }
 

@@ -25,6 +25,11 @@ class Iposervices {
         return axios.delete(IPO_API_BASE_URL + '/deleteipo/' + ipoId);
     }
 
+    getipofromto(from,to){
+        return axios.get(IPO_API_BASE_URL+'/getipofromandto/'+from+'/'+to);
+
+    }
+
     
 }
 

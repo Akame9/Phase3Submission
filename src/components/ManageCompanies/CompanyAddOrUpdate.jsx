@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Companyservices from '../../services/Companyservices';
 import Sectorservice from '../../services/Sectorservice';
-
+import {DropdownButton, Dropdown, Container,Row,Col} from 'react-bootstrap';
+ 
 class CompanyAddOrUpdate extends Component {
 
     constructor(props) {
@@ -75,12 +76,21 @@ class CompanyAddOrUpdate extends Component {
     }
 
     changesectorNameHandler= (event) => {
+        console.log('Hello')
         this.setState({sectorName: event.target.value});
     }
     
     cancel(){
         this.props.history.push('/companylists');
     }
+
+    handleSelect = (e) => {
+        console.log(e)
+        this.state.sectorName = e;
+    }
+
+    
+
 
     saveOrUpdateCompany = (e) => {
         e.preventDefault();
@@ -94,7 +104,7 @@ class CompanyAddOrUpdate extends Component {
         console.log('company => ' + JSON.stringify(company));
 
         
-        if(this.state.id === '_add'){
+        if(this.state.id == '_add'){
             Companyservices.addcompany(company).then(res =>{
                 this.props.history.push('/companylists');
             });
@@ -108,7 +118,7 @@ class CompanyAddOrUpdate extends Component {
     
 
     getTitle(){
-        if(this.state.id === '_add'){
+        if(this.state.id == '_add'){
             return <h3 className="text-center">New Company</h3>
         }else{
             return <h3 className="text-center">Update Company</h3>
@@ -162,16 +172,43 @@ class CompanyAddOrUpdate extends Component {
                                         </div>
                                         <div className = "form-group">
                                         <label> Sector: </label>
-                                        <select class="form-control" >
+                                        {/*
+                                        <Container>
+                                            <Row>
+                                                <Col>
+                                                Hello
+                                                <DropdownButton
+                                                alignRight
+                                                title="select"
+                                                id="dropdown-menu-align-right"
+                                                variant="Secondary"
+                                                onSelect={this.handleSelect}
+                                                
+                                                    >
+                                        {this.state.sector.map(
+                                                s =>
+                                                <Dropdown.Item eventKey={s.sectorName}>{s.sectorName}</Dropdown.Item>
+                                        )}
+                                        
+                                        </DropdownButton>
+                                                </Col>
+                                            </Row>
+                                        </Container>
+                                        */}
+                                        {
+                                        <select class="form-control" onChange={this.changesectorNameHandler}>
 
                                             
                                             {this.state.sector.map(
                                                 s =>
-                                                <option value={this.state.sectorName=s.sectorName}>{s.sectorName}</option>
+                                                <option value={s.sectorName}>{s.sectorName}</option>
                                             )
                                             
                                             }
                                         </select>
+                                        
+
+                                        }
                                         </div>
 
                                         <button className="btn btn-success" onClick={this.saveOrUpdateCompany} style={{marginTop:"10px"}}>Save</button>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Sectorservice from '../../services/Sectorservice';
-import {Button} from 'react-bootstrap';
+import {Button, Card, Container, Row, Col} from 'react-bootstrap';
 
 class SectorLists extends Component {
     constructor(props) {
@@ -29,31 +29,26 @@ class SectorLists extends Component {
             <div>
                 <h2 className="text-center" style={{marginTop:'80px'}}>Sectors</h2>
                 <Button onClick={this.addse} size='sm' style={{margin:'10px',marginLeft:'50px'}}> New Sector</Button>
-                 
-                <div className = "container">
-                        <table className = "table table-striped table-bordered">
+                <Container>
+                    <Row>
+                    {
+                        this.state.se.map(
+                            se =>
+                            <Col xs={4} >
+                            
+                            <Card bg='dark' text='white' style={{width:'18rem',margin:'10px'}}>
+                                <Card.Header><h3>{se.sectorName}</h3></Card.Header>
+                                <Card.Body>{se.sectorBrief}</Card.Body>
+                            </Card>
+                            </Col> 
 
-                            <thead>
-                                <tr>
-                                    <th> Sector</th>
-                                    <th> Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    this.state.se.map(
-                                            se =>
-                                            <tr key = {se.id}>
-                                             <td> {se.sectorName}</td>
-                                             <td> {se.sectorBrief}</td>
-                                        </tr>
+                        )
+                        
 
-                                        )
-                                }
-                            </tbody>
-                        </table>
-
-                 </div>  
+                    }                
+                 </Row>
+                </Container>
+                  
             </div>
         );
     }
