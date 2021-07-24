@@ -48,7 +48,7 @@ class CompanyLists extends Component {
                                 <tr>
                                     <th> Company </th>
                                     <th> CEO</th>
-                                    <th> BoardOfDirectors</th>
+                                    <th> Board Of Directors</th>
                                     <th> Turnover </th>
                                     <th> Description</th>
                                     <th> Sector</th>

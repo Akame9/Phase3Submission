@@ -16,6 +16,7 @@ import SetStockCode from './SetStockCode';
 
 
 
+
 class Admin extends Component {
 
     constructor(props) {
@@ -77,6 +78,7 @@ class Admin extends Component {
         
         <Route path = "/sectorlists" component = {SectorLists}></Route>
         <Route path = "/add-sector" component = {SectorAdd}></Route>
+                    
                           
       </Switch>
       </div>

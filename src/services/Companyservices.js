@@ -24,10 +24,28 @@ class Companyservices {
         return axios.delete(COMPANY_API_BASE_URL + '/deletecompany/' + companyId);
     }
 
-    getstockprice(companyName, from, to){
-        return axios.get(COMPANY_API_BASE_URL + '/companystockprice/' + companyName + "/" + from + "/" + to);
+    getstockprice(companyName, stockExchangeName, from, to){
+        return axios.get(COMPANY_API_BASE_URL + '/companystockprice/' + companyName + "/" + stockExchangeName + "/" + from + "/" + to);
     }
 
+    /*getstkpricelist(companyName){
+        return axios.get(COMPANY_API_BASE_URL + '/companystkprice/' + companyName);
+    }*/
+
+    getbycompanyName(companyName){
+
+        return axios.get(COMPANY_API_BASE_URL + '/companydetails/' + companyName);
+
+    }
+
+    getcompanyipo(companyName){
+        return axios.get(COMPANY_API_BASE_URL+ '/getcompanyipo/' + companyName);
+    }
+
+    getcompanycse(companyName){
+        return axios.get(COMPANY_API_BASE_URL + '/getcompanycse/' + companyName);
+
+    }
 }
 
 export default new Companyservices();

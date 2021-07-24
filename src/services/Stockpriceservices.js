@@ -16,5 +16,9 @@ class Stockpriceservices {
             }
         });
     }
+
+    getlatestsp(){
+        return axios.get(SP_API_BASE_URL+"/getlatestshareprice");
+    }
 }
 export default new Stockpriceservices()

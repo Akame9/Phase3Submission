@@ -11,7 +11,7 @@ ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 
 
 let chartConfigs = {
-    type: 'column2d',// The chart type
+    type: 'mscombi2d',// The chart type
     width: '700', // Width of the chart
     height: '400', // Height of the chart
     dataFormat: 'json', // Data type
@@ -23,19 +23,12 @@ let chartConfigs = {
             "xAxisName": "Company",
             "yAxisName": "SHare Price",
             "numberSuffix": "K",
+            "labeldisplay": "rotate",
             "theme": "fusion",
         },
         // Chart Data
-        "data": [{
-            "label": "MAruti",
-            "value": "290"
-        }, {
-            "label": "LG",
-            "value": "260"
-        }, {
-            "label": "Nokia",
-            "value": "180"
-        }]
+        "categories": [],
+        "dataset": []
     },
 };
 
@@ -53,6 +46,21 @@ class CompareCompany extends Component {
             chart: chartConfigs
             
         }
+
+        this.changecompanyNameHandler = this.changecompanyNameHandler.bind(this);
+        this.changestkexHandler = this.changestkexHandler.bind(this);
+        this.changefromHandler = this.changefromHandler.bind(this);
+        this.changetoHandler = this.changetoHandler.bind(this);
+        this.generateMap = this.generateMap.bind(this);
+        this.addMore = this.addMore.bind(this);
+        
+    }
+
+    componentDidMount(){
+        chartConfigs.dataSource.dataset = [];
+        chartConfigs.dataSource.categories = [];
+        this.setState({chart:chartConfigs});
+        
     }
 
     changecompanyNameHandler= (event) => {
@@ -71,7 +79,17 @@ class CompareCompany extends Component {
         this.setState({to: event.target.value});
     }
 
-    saveOrUpdateCompany = (e) => {
+
+    generateMap = (e) => {
+        e.preventDefault();
+        chartConfigs.dataSource.dataset = [];
+        chartConfigs.dataSource.categories = [];
+        this.setState({chart:chartConfigs});
+        this.addMore(e);
+
+    }
+
+    addMore = (e) => {
         e.preventDefault();
         let company = { companyName: this.state.companyName, 
                         stkex: this.state.stkex,
@@ -80,34 +98,46 @@ class CompareCompany extends Component {
                 };
         console.log('company => ' + JSON.stringify(company));
 
-        Companyservices.getstockprice(company.companyName,company.from,company.to).then(res =>
+        Companyservices.getstockprice(company.companyName,company.stkex,company.from,company.to).then(res =>
             {
                 console.log(res);
+                let tempdata = [];
+                let templabel = [];
                 var prevDs = Object.assign({}, this.state.chart.dataSource);
 						
-										res.data.forEach((value, key) => {  
-									//		data[key] = {
-										prevDs.data[key] ={
-										
-											'label' : res.data[key].date,
-											'value' : res.data[key].sharePrice
-										 };
-									
+				res.data.forEach((value, key) => {  
+				
+                    tempdata[key] ={
+								'value' : res.data[key].sharePrice
+								};
+                    templabel[key] ={
+                        'label' : res.data[key].date,
+                                };
+                            });
+
+                prevDs.categories.push({
+                    "category": templabel
+                });
+
+                prevDs.dataset.push({
+                                "seriesname": company.companyName,
+                                "renderAs": "line",
+                                "data": tempdata
+
+                                });
 										 
-										 this.setState({
-											chart:{dataSource: prevDs}
-										});
+				this.setState({chart:{dataSource: prevDs}});
 									
                   // console.log('data'+JSON.stringify(data));
 				   
-									});
+				
                                   //console.log('this.'+ data);
-								console.log('chart'+JSON.stringify(chartConfigs));
+				console.log('chart'+JSON.stringify(chartConfigs));
 							
 							
-							})//endo of .then line 53				
+				})//endo of .then line 53				
 							
-					}
+	}
 
     render() {
         return (
@@ -142,7 +172,9 @@ class CompareCompany extends Component {
                                                 style={{marginBottom:'5px'}} value={this.state.to} onChange={this.changetoHandler}/>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.saveOrUpdateCompany} style={{margin:'10px'}}>Generate Map</button>
+                                        <button className="btn btn-success" onClick={this.generateMap} style={{margin:'10px'}}>Generate Map</button>
+                                        <button className="btn btn-success" onClick={this.addMore} style={{margin:'10px'}}>Add Company</button>
+                                        
                                         
                                     </form>
                                 </div>
