@@ -31,5 +31,9 @@ public class stockPriceServices {
         return stockpricerepository.findBystockCode(stockcode,from,to);
 
     }
+
+    public Double getLatestStockPrice(Long stockcode){
+        return stockpricerepository.getLatestStockPrice(stockcode);
+    }
     
 }

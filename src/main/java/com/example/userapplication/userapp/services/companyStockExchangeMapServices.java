@@ -51,6 +51,11 @@ public class companyStockExchangeMapServices {
         return cse;
     }
 
+    public Long getuniquestockcode(String companyName, String stockExchangeName){
+
+        return cserepository.getuniquestockcode(companyName, stockExchangeName);
+    }
+
     
     
 }

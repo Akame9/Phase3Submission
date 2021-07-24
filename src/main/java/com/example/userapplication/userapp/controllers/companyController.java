@@ -14,6 +14,7 @@ import com.example.userapplication.userapp.services.companyServices;
 import com.example.userapplication.userapp.services.companyStockExchangeMapServices;
 import com.example.userapplication.userapp.services.stockPriceServices;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -75,35 +76,42 @@ public class companyController {
       return company.getStockprice();
     }
 
-    @RequestMapping(value = "/companystockprice/{companyName}/{from}/{to}",method = RequestMethod.GET)
+    @RequestMapping(value = "/companystockprice/{companyName}/{stockExchangeName}/{from}/{to}",method = RequestMethod.GET)
     @ResponseBody
     public List<stockPrice> companyStockPrice(@PathVariable("companyName") String companyName,
+    @PathVariable("stockExchangeName") String stockExchangeName,
     @PathVariable("from") Date from,@PathVariable("to") Date to){
 
-      List<companyStockExchangeMap> stockcodes = cseservices.getstockcodes(companyName);
+      Long stockcode = cseservices.getuniquestockcode(companyName,stockExchangeName);
       
-      List<stockPrice> sp = new ArrayList<>();
-      for(companyStockExchangeMap stockp: stockcodes){
-        List<stockPrice> stockprice = stockpriceservices.getStockPrice(stockp.getStockCode(),from, to);
-        sp.addAll(stockprice);
+      List<stockPrice> stockprice = stockpriceservices.getStockPrice(stockcode,from, to);
+        
 
-      }
+      
       /*for(companyStockExchangeMap cse : stockcodes){
         List<stockPrice> stockprice = stockpriceservices.getStockPrice(cse.getStockCode(), from, to);
         sp.addAll(stockprice);
 
       }*/
 
-      return sp;
+      return stockprice;
       
     }
 
-    @RequestMapping(value = "/getipodetails/{companyName}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getcompanyipo/{companyName}",method = RequestMethod.GET)
     @ResponseBody
-    public ipoDetails getIpodetails(@PathVariable String companyName){
+    public ipoDetails getCompanyIpo(@PathVariable String companyName){
 
       companyEntity company = companyservices.companyInfo(companyName);
       return company.getIpodetails();
+
+    }
+
+    @RequestMapping(value = "/getcompanycse/{companyName}",method = RequestMethod.GET)
+    public List<companyStockExchangeMap> getCompanyCSE(@PathVariable String companyName){
+
+      companyEntity company = companyservices.companyInfo(companyName);
+      return company.getCompanystockexchangemap();
 
     }
 
@@ -143,6 +151,30 @@ public class companyController {
     public void deleteCompany(@PathVariable Long companyId){
 
       companyservices.deleteCompany(companyId);
+
+    }
+
+    @RequestMapping(value = "/getlatestshareprice",method = RequestMethod.GET)
+    public ArrayList<JSONObject> latestSharePrice(){
+
+      ArrayList<JSONObject> latestshares = new ArrayList<>();
+
+      List<companyEntity> companies = this.companyList();
+      for(companyEntity cmp : companies){
+
+        List<companyStockExchangeMap> stockcodes = cseservices.getstockcodes(cmp.getCompanyName());
+        for(companyStockExchangeMap cse : stockcodes){
+          double latestsp = stockpriceservices.getLatestStockPrice(cse.getStockCode());
+          JSONObject obj = new JSONObject();
+          obj.put("companyName", cse.getCompanyName());
+          obj.put("stockExchangeName",cse.getStockExchangeName());
+          obj.put("sharePrice", latestsp);
+          latestshares.add(obj);
+
+        }
+
+      }
+      return latestshares;
 
     }
 

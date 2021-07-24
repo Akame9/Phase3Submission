@@ -84,7 +84,7 @@ public class userController {
         
     }
 
-    @RequestMapping(value = "/viewipo",method = RequestMethod.GET)
+    /*@RequestMapping(value = "/viewipo",method = RequestMethod.GET)
     public String viewIpo(){
 
         String uri = "http://localhost:8080/ipocontroller/listipo/";
@@ -92,6 +92,20 @@ public class userController {
 	    String result = restTemplate.getForObject(uri, String.class);
 	    return result;
         
+    }*/
+
+    @RequestMapping(value = "/viewprofile/{userId}",method = RequestMethod.GET)
+    public userEntity viewProfile(@PathVariable Long userId){
+        return userservice.viewUser(userId);
+    }
+
+
+    @RequestMapping(value = "/updateprofile/{userId}",method = RequestMethod.POST)
+    public userEntity updateProfile(@PathVariable Long userId, @RequestBody String password){
+        userEntity usr = userservice.viewUser(userId);
+        usr.setPassword(password);
+        userservice.createNewUser(usr);
+        return usr;  
     }
 
 }

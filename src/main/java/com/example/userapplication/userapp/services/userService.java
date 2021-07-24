@@ -86,5 +86,9 @@ public class userService {
         }
         
     }
+
+    public userEntity viewUser(Long userId){
+        return userrepository.getById(userId);
+    }
     
 }
