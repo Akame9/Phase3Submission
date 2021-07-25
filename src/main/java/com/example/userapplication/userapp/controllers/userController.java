@@ -100,8 +100,8 @@ public class userController {
     }
 
 
-    @RequestMapping(value = "/updateprofile/{userId}",method = RequestMethod.POST)
-    public userEntity updateProfile(@PathVariable Long userId, @RequestBody String password){
+    @RequestMapping(value = "/updateprofile/{userId}/{password}",method = RequestMethod.GET)
+    public userEntity updateProfile(@PathVariable("userId") Long userId, @PathVariable("password") String password){
         userEntity usr = userservice.viewUser(userId);
         usr.setPassword(password);
         userservice.createNewUser(usr);

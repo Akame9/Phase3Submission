@@ -178,6 +178,30 @@ public class companyController {
 
     }
 
-    
+
+    @RequestMapping(value = "/getlatestsharepriceforcompany/{companyName}",method = RequestMethod.GET)
+    public ArrayList<JSONObject> latestSharePriceForCompany(@PathVariable String companyName){
+
+      ArrayList<JSONObject> latestshares = new ArrayList<>();
+
+      companyEntity company = this.companyDetails(companyName);
+      
+
+      List<companyStockExchangeMap> stockcodes = cseservices.getstockcodes(company.getCompanyName());
+      for(companyStockExchangeMap cse : stockcodes){
+          double latestsp = stockpriceservices.getLatestStockPrice(cse.getStockCode());
+          JSONObject obj = new JSONObject();
+          obj.put("companyName", cse.getCompanyName());
+          obj.put("stockExchangeName",cse.getStockExchangeName());
+          obj.put("sharePrice", latestsp);
+          latestshares.add(obj);
+
+        }
+
+      
+      return latestshares;
+
+    }
+
 
 }

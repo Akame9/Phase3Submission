@@ -88,7 +88,8 @@ public class userService {
     }
 
     public userEntity viewUser(Long userId){
-        return userrepository.getById(userId);
+        userEntity user = userrepository.findById(userId).get(); 
+        return user;
     }
     
 }
