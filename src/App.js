@@ -6,6 +6,7 @@ import welcome from './components/welcome';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import User from './components/User';
+import welcome1 from './components/welcome1';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <div>
       
                     <Switch> 
-                          <Route path = "/" exact component = {welcome}></Route>
+                          <Route path = "/" exact component = {welcome1}></Route>
                           <Route path = "/signup" exact component = {SignUp}></Route>
                           <Route path = "/signin" exact component = {Login}></Route>
                           <Route path = "/user/:id" exact component = {User}></Route>

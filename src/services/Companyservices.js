@@ -32,9 +32,6 @@ class Companyservices {
         return axios.get(COMPANY_API_BASE_URL+'/getlatestsharepriceforcompany/'+companyName);
     }
 
-    /*getstkpricelist(companyName){
-        return axios.get(COMPANY_API_BASE_URL + '/companystkprice/' + companyName);
-    }*/
 
     getbycompanyName(companyName){
 

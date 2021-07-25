@@ -1,0 +1,15 @@
+.homepage-bgimage {
+    background: url("https://www.holisticsa.gr/sites/default/files/2019-11/bigdata_0.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    color: aliceblue;
+  }
