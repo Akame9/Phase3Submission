@@ -152,7 +152,7 @@ public class companyEntity {
         this.companyBrief = companyBrief;
     }
 
-    protected companyEntity(){
+    public companyEntity(){
 
     }
     public companyEntity(String companyName, String ceo, String boardOfDirectors, double turnover,

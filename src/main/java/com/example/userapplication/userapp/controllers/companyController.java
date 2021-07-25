@@ -68,13 +68,6 @@ public class companyController {
 
     }
 
-    @RequestMapping(value = "/companystkprice/{companyName}",method = RequestMethod.GET)
-    @ResponseBody
-    public List<stockPrice> companyStkPrice(@PathVariable String companyName){
-      
-      companyEntity company = companyservices.companyInfo(companyName);
-      return company.getStockprice();
-    }
 
     @RequestMapping(value = "/companystockprice/{companyName}/{stockExchangeName}/{from}/{to}",method = RequestMethod.GET)
     @ResponseBody

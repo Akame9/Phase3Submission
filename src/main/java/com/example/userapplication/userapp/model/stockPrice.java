@@ -78,7 +78,7 @@ public class stockPrice {
     public void setStockCode(Long stockCode) {
         this.stockCode = stockCode;
     }
-    protected stockPrice(){
+    public stockPrice(){
         
     }
     public stockPrice(double sharePrice, Date date, Time time, LocalDateTime localdatetime, companyEntity company,

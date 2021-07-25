@@ -62,7 +62,7 @@ public class stockExchange {
         this.companystockexchangemap = companystockexchangemap;
     }
 
-    protected stockExchange(){
+    public stockExchange(){
         
     }
     public stockExchange(String stockExchangeName, String stockExchangeBrief) {

@@ -77,7 +77,7 @@ public class companyStockExchangeMap {
         this.stockExchange = stockExchange;
     }
 
-    protected companyStockExchangeMap(){
+    public companyStockExchangeMap(){
 
     }
 

@@ -61,7 +61,7 @@ public class sector {
         this.company = company;
     }
 
-    protected sector(){
+    public sector(){
         
     }
     public sector(String sectorName, String sectorBrief) {
