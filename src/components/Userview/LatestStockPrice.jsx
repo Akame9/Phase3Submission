@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import {Table, Form, Button, FormControl,Nav} from 'react-bootstrap';
+import { AutoComplete } from "@react-md/autocomplete";
 import Stockpriceservices from '../../services/Stockpriceservices';
+import Companyservices from '../../services/Companyservices';
 
 class LatestStockPrice extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            lsp: []
+            lsp: [],
+            search: '',
+            companylist: []
         }
 
         this.companydetails = this.companydetails.bind(this);
+        this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.searchForCompany = this.searchForCompany.bind(this);
      
         
     }
@@ -19,12 +25,30 @@ class LatestStockPrice extends Component {
         Stockpriceservices.getlatestsp().then(res => {
             console.log(res);
             this.setState({lsp:res.data});
+            res.data.forEach((value, key) => {
+                this.state.companylist.push(
+                    res.data[key].companyName
+                );
+            });
         });
+        console.log(this.state.companylist);
     }
 
     companydetails(companyName,stockExchangeName){
         this.props.history.push(`/companydetails/${companyName}/${stockExchangeName}`);
 
+    }
+
+    handleSearchChange = (event) => {
+        this.setState({search : event.target.value});
+    }
+
+    
+    searchForCompany = (e) => {
+        e.preventDefault();
+        Companyservices.getlateststockpriceforcompany(this.state.search).then(res =>{
+            this.setState({lsp:res.data})
+        });
     }
 
     render() {
@@ -33,15 +57,19 @@ class LatestStockPrice extends Component {
             <div className="container" style={{marginTop:'80px'}}>
                 <h3 className="text-center">Latest Shares</h3>
                 <Form className="d-flex" style={{width:'18rem',marginBottom:'10px'}}>
-                <FormControl
-                    type="search"
-                    placeholder="Search"
-                    className="mr-2"
-                    aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
+                
+                <AutoComplete
+                    data={this.state.companylist}
+                    label="search company"
+                    clear
+                    id="input"
+                    //value={this.state.search}
+                    onChange={this.handleSearchChange}
+                    />
+                
+                <Button variant="outline-success" onClick={this.searchForCompany}>Search</Button>
                 </Form>
-                <Table striped bordered hover variant="dark">
+                <Table striped bordered hover >
                     <thead>
                         <tr>
                         <th>#</th>

@@ -17,7 +17,7 @@ class Userservices {
     }
 
     updateuser(userId,password){
-        return axios.post(USER_API_BASE_URL + "/updateprofile/" + userId,password);
+        return axios.get(USER_API_BASE_URL + "/updateprofile/" + userId + "/" + password);
     }
 }
 

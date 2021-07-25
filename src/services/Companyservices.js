@@ -28,6 +28,10 @@ class Companyservices {
         return axios.get(COMPANY_API_BASE_URL + '/companystockprice/' + companyName + "/" + stockExchangeName + "/" + from + "/" + to);
     }
 
+    getlateststockpriceforcompany(companyName){
+        return axios.get(COMPANY_API_BASE_URL+'/getlatestsharepriceforcompany/'+companyName);
+    }
+
     /*getstkpricelist(companyName){
         return axios.get(COMPANY_API_BASE_URL + '/companystkprice/' + companyName);
     }*/
@@ -46,6 +50,8 @@ class Companyservices {
         return axios.get(COMPANY_API_BASE_URL + '/getcompanycse/' + companyName);
 
     }
+
+    
 }
 
 export default new Companyservices();

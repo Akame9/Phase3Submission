@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import { Card , Button} from 'react-bootstrap';
+import { Card , Button, Modal} from 'react-bootstrap';
 import Userservices from '../../services/Userservices';
 
 
-
-var change = false;
 class UserProfile extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             id: this.props.match.params.id,
-            user: []
+            user: [],
+            show : false
                         
         }
 
-        this.changepasswordHandler = this.changepassword.bind(this);
-        this.changepassword = this.changepassword.bind(this);
+        this.changepasswordHandler = this.changepasswordHandler.bind(this);
+        this.updatePassword = this.updatePassword.bind(this);
       
     }
 
@@ -28,15 +27,29 @@ class UserProfile extends Component {
         
     }
 
-    changepassword(){
-        change=true;
-        this.setState();
+    handleShow(){
+        
+        this.setState({show:true});
+        
+    }
+
+    handleHide(){
+        
+        this.setState({show:false});
     }
     changepasswordHandler= (event) => {
-        Userservices.updateuser(this.state.id,event.target.value).then(res => {
-            this.setState({user: res.data });
+        console.log(event.target.value)
+        this.setState({user:{password : event.target.value}});
+        
+        
+    }
+
+    updatePassword = (e) => {
+        e.preventDefault();
+        Userservices.updateuser(this.state.id,this.state.user.password).then(res => {
+            this.setState({user: res.data, show : false });
         });
-        change=false;
+
     }
 
     render() {
@@ -45,15 +58,23 @@ class UserProfile extends Component {
                 <Card.Text>Username : {this.state.user.username}</Card.Text>
                 <Card.Text>Password : {this.state.user.password}</Card.Text>
                 <Card.Text>EmailId : {this.state.user.email}</Card.Text>
-                <Button onClick={this.changepassword}>Change Password</Button>
+                <Button onClick={this.handleShow.bind(this)}>Change Password</Button>
                 
-                { 
-                 
-                change && <input placeholder="password" name="password" className="form-control" 
-                             value={this.state.user.password} onChange={this.changepasswordHandler}/>
-                                    
-                
-                }
+
+                <Modal show={this.state.show} onHide={this.handleHide.bind(this)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Enter New Password</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                <input placeholder="password" name="password" className="form-control" 
+                value={this.state.user.password} onChange={this.changepasswordHandler}/>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="primary" onClick={this.updatePassword}>Save changes</Button>
+                </Modal.Footer>
+                </Modal>
                 
 
             </Card>
