@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
 @RestController
 public class companyStockExchangeMapController {
 
@@ -31,12 +31,12 @@ public class companyStockExchangeMapController {
     public ResponseEntity<Object> insertcse(@RequestBody companyStockExchangeMap cse){
 
         
-        String cmpuri = "http://localhost:8080/companydetails/"+cse.getCompanyName();
+        String cmpuri = "https://aathiraspringbootphase3.herokuapp.com/companydetails/"+cse.getCompanyName();
 	    RestTemplate cmprestTemplate = new RestTemplate();
 	    companyEntity company = cmprestTemplate.getForObject(cmpuri, companyEntity.class);
         cse.setCompany(company);
 
-        String stkuri = "http://localhost:8080/getstockexchange/"+cse.getStockExchangeName();
+        String stkuri = "https://aathiraspringbootphase3.herokuapp.com/getstockexchange/"+cse.getStockExchangeName();
 	    RestTemplate stkrestTemplate = new RestTemplate();
 	    stockExchange stockexchange = stkrestTemplate.getForObject(stkuri, stockExchange.class);
         cse.setStockExchange(stockexchange);

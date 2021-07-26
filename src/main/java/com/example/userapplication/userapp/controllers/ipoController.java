@@ -24,7 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/ipocontroller/")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
 public class ipoController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class ipoController {
     @RequestMapping(value = "/addipo", method = RequestMethod.POST)
     public ResponseEntity<Object> addIpo(@RequestBody ipoDetails ipo){
 
-        String uri = "http://localhost:8080/companydetails/"+ipo.getCompanyName();
+        String uri = "https://aathiraspringbootphase3.herokuapp.com/companydetails/"+ipo.getCompanyName();
 	    RestTemplate restTemplate = new RestTemplate();
 	    companyEntity company = restTemplate.getForObject(uri, companyEntity.class);
         //check for null company
@@ -46,7 +46,7 @@ public class ipoController {
         
         List<String> stockexchangeName = cseservices.getStockExchangeByCompany(ipo.getCompanyName());
         for(String se : stockexchangeName){
-            String seuri = "http://localhost:8080/getstockexchange/"+se;
+            String seuri = "https://aathiraspringbootphase3.herokuapp.com/getstockexchange/"+se;
 	        RestTemplate serestTemplate = new RestTemplate();
 	        stockExchange stke = serestTemplate.getForObject(seuri, stockExchange.class);
             ipo.getStockexchange().add(stke);
@@ -66,14 +66,14 @@ public class ipoController {
         return iposervices.showIpo();
     }
 
-    //@CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
     @RequestMapping(value = "/deleteipo/{ipoId}",method = RequestMethod.DELETE)
     public void deleteIpo(@PathVariable Long ipoId){
         iposervices.deleteIpo(ipoId);
     }
 
 
-    //@CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
     @RequestMapping(value = "/updateipo/{ipoId}",method = RequestMethod.POST)
     public ResponseEntity<ipoDetails> updateIpo(@PathVariable Long ipoId,
     @RequestBody ipoDetails newipo){

@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
 @RestController
 public class companyController {
 
@@ -43,7 +43,7 @@ public class companyController {
     @RequestMapping(value = "/company", method = RequestMethod.POST)
     public ResponseEntity<Object> createCompany(@RequestBody companyEntity company){
       
-        String uri = "http://localhost:8080/sectordetails/"+company.getSectorName();
+        String uri = "https://aathiraspringbootphase3.herokuapp.com/sectordetails/"+company.getSectorName();
 	      RestTemplate restTemplate = new RestTemplate();
 	      sector sector = restTemplate.getForObject(uri, sector.class);
         company.setSector(sector);
@@ -108,7 +108,7 @@ public class companyController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
     @RequestMapping(value = "/updatecompany/{companyId}",method = RequestMethod.PUT)
     public ResponseEntity<companyEntity> updateCompany(@PathVariable Long companyId,
     @RequestBody companyEntity newcompany){
@@ -121,7 +121,7 @@ public class companyController {
         oldcompany.setTurnover(newcompany.getTurnover());
         oldcompany.setCompanyBrief(newcompany.getCompanyBrief());
         oldcompany.setSectorName(newcompany.getSectorName());
-        String uri = "http://localhost:8080/sectordetails/"+oldcompany.getSectorName();
+        String uri = "https://aathiraspringbootphase3.herokuapp.com/sectordetails/"+oldcompany.getSectorName();
 	      RestTemplate restTemplate = new RestTemplate();
 	      sector sector = restTemplate.getForObject(uri, sector.class);
         oldcompany.setSector(sector);

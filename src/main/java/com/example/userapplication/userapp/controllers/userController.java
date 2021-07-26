@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
 @RestController
 public class userController {
 
     @Autowired
     private userService userservice;
-    //@CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
 
 
     @RequestMapping(value = "/signup",method = RequestMethod.POST)
@@ -52,13 +52,13 @@ public class userController {
     public ModelAndView welcomePage(@PathVariable Long userId ){
 
         userservice.confirmed(userId);
-        String uri = "http://localhost:3000/user/"+userId;
+        String uri = "https://aathiraphase3reactfrontend.herokuapp.com/user/"+userId;
         return new ModelAndView("redirect:"+uri);
 	    
 	    
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
     @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.GET)
     public userEntity login(@PathVariable("username") String username,
     @PathVariable("password") String password){
@@ -77,7 +77,7 @@ public class userController {
     @ResponseBody
     public String searchByCompany(@PathVariable String companyName){
 
-        String uri = "http://localhost:8080/companydetails/"+companyName;
+        String uri = "https://aathiraspringbootphase3.herokuapp.com/companydetails/"+companyName;
 	    RestTemplate restTemplate = new RestTemplate();
 	    String result = restTemplate.getForObject(uri, String.class);
 	    return result;
@@ -87,7 +87,7 @@ public class userController {
     /*@RequestMapping(value = "/viewipo",method = RequestMethod.GET)
     public String viewIpo(){
 
-        String uri = "http://localhost:8080/ipocontroller/listipo/";
+        String uri = "https://aathiraspringbootphase3.herokuapp.com/ipocontroller/listipo/";
 	    RestTemplate restTemplate = new RestTemplate();
 	    String result = restTemplate.getForObject(uri, String.class);
 	    return result;
