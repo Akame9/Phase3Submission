@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.userapplication.userapp.model.companyEntity;
+import com.example.userapplication.userapp.model.companyStockExchangeMap;
 import com.example.userapplication.userapp.model.sector;
 import com.example.userapplication.userapp.model.stockPrice;
 import com.example.userapplication.userapp.services.companyServices;
+import com.example.userapplication.userapp.services.companyStockExchangeMapServices;
 import com.example.userapplication.userapp.services.sectorServices;
 import com.example.userapplication.userapp.services.stockPriceServices;
 
@@ -32,6 +34,10 @@ public class sectorController {
 
     @Autowired
     private stockPriceServices stockpriceservices;
+
+    @Autowired
+    private companyStockExchangeMapServices cseservices;
+
 
 
     @RequestMapping(value = "/sector",method = RequestMethod.POST)
@@ -75,9 +81,12 @@ public class sectorController {
         int count = 0;
         for(companyEntity c : company){
 
-            List<stockPrice> stkp = c.getStockprice();
-            for(stockPrice sp : stkp){
-                List<stockPrice> stockprice = stockpriceservices.getStockPrice(sp.getStockCode(), from, to);
+            List<companyStockExchangeMap> stockcodelist = cseservices.getstockcodes(c.getCompanyName());
+            //Long stockcode = cseservices.getuniquestockcode(c.getCompanyName(),"NSE");
+
+            //List<stockPrice> stkp = c.getStockprice();
+            //for(stockPrice sp : stkp){
+                List<stockPrice> stockprice = stockpriceservices.getStockPrice(stockcodelist.get(0).getStockCode(), from, to);
                 for(stockPrice stockp : stockprice){
 
                     avg += stockp.getSharePrice();
@@ -85,7 +94,7 @@ public class sectorController {
 
                 }
                 
-            }
+            //}
 
         }
         return avg/count;
