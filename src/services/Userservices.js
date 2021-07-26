@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = "http://localhost:8080/";
+const USER_API_BASE_URL = "https://aathiraspringbootphase3.herokuapp.com";
 
 class Userservices {
 
     signup(user){
-        return axios.post(USER_API_BASE_URL+"signup",user);
+        return axios.post(USER_API_BASE_URL+"/signup",user);
     }
 
     signin(user){

@@ -46,8 +46,8 @@ class User extends Component {
             <Nav.Link as={Link} to={"/comparecompanies"}>Compare Company</Nav.Link>
             <Nav.Link as={Link} to={"/comparesectors"}>Compare Sector</Nav.Link>
             <Nav.Link as={Link} to={"/comparesectorandcompany"}>Compare Sector And Company</Nav.Link>
-            <Button as={Link} to={"/viewprofile/"+this.state.id}variant="outline-light" size='sm' style={{marginLeft : "380px"}}>Profile</Button>
-            <Button as={Link} to={"/"}variant="outline-light" size='sm' style={{marginLeft : "10px"}}>logout</Button>
+            <Button as={Link} to={"/viewprofile/"+this.state.id}variant="outline-light" size='sm' style={{marginLeft : "80px"}} >Profile</Button>
+            <Button as={Link} to={"/"}variant="outline-light" size='sm' style={{marginLeft : "10px"}} >logout</Button>
 
           </Nav>
         </Navbar.Collapse>

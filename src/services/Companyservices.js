@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const COMPANY_API_BASE_URL = "http://localhost:8080";
+const COMPANY_API_BASE_URL = "https://aathiraspringbootphase3.herokuapp.com";
 
 class Companyservices {
 

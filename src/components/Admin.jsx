@@ -52,7 +52,7 @@ class Admin extends Component {
             <Nav.Link as={Link} to={"/ipolists"}>Manage IPO</Nav.Link>
             <Nav.Link as={Link} to={"/sectorlists"}>Manage Sector</Nav.Link>
             <Nav.Link as={Link} to={"/setstockcode"}>Stock Code</Nav.Link>
-            <Button as={Link} to={"/"}variant="outline-light" size='sm' style={{marginLeft : "200px"}}>logout</Button>
+            <Button as={Link} to={"/"}variant="outline-light" size='sm' style={{marginLeft : "100px"}}>logout</Button>
           </Nav>
         </Navbar.Collapse>
 

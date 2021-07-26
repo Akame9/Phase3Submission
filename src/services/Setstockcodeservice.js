@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SC_API_BASE_URL = "http://localhost:8080";
+const SC_API_BASE_URL = "https://aathiraspringbootphase3.herokuapp.com";
 
 class Setstockcodeservice {
 

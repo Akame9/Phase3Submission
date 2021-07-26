@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const IPO_API_BASE_URL = "http://localhost:8080/ipocontroller";
+const IPO_API_BASE_URL = "https://aathiraspringbootphase3.herokuapp.com/ipocontroller";
 
 class Iposervices {
 
