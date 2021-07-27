@@ -26,7 +26,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 //@RequestMapping("/ipocontroller/")
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
 public class ipoController {
 
     @Autowired
