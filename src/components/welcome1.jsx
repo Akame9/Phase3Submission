@@ -3,11 +3,13 @@ import {Card, Button,Modal} from 'react-bootstrap';
 import Userservices from '../services/Userservices';
 import './welcome.css';
 
+var token = ''
 class welcome1 extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
+            
             show:false,
             username:'',
             password:'',
@@ -38,24 +40,45 @@ class welcome1 extends Component {
     signin = (e) => {
         e.preventDefault();
         let user = { username: this.state.username, 
-                    password: this.state.password, 
+                    password: this.state.password
                 };
         console.log('user => ' + JSON.stringify(user));
+        Userservices.authenticateuser(JSON.stringify({
+            "username" :user.username,
+            "password": user.password,
+            "role" : "admin"
+            })).then(res => {
+                console.log(res)
+                token = res.data.token;
+                console.log("Hello"+token);
 
-        Userservices.signin(user).then(res =>{
-            
-            if(res.data.admin){
-                this.props.history.push("/admin");
-            }
-            else if(res.data.admin==false){
-                //console.log(res)
-                this.props.history.push("/user/"+res.data.id);
-            }
-            else{
-                this.setState({valid:true});    
-            }
-            
-        });
+                Userservices.signin(user,token).then(res =>{
+
+                    console.log(res)
+                    /*let auth = JSON.stringify({
+                        "username" :res.data.username,
+                        "password": res.data.password,
+                        })*/
+                    
+                    if(res.data.admin){
+                        console.log("Helloooooooo "+token)
+                        this.props.history.push("/admin/"+token);
+                    }
+                    else if(res.data.admin==false){
+                        //console.log(res)
+                        this.props.history.push("/user/"+res.data.id+"/"+ token);
+                    }
+                    else{
+                        this.setState({valid:true});    
+                    }
+                    
+                });
+
+            });
+        
+        
+
+        
     }
 
 
@@ -99,7 +122,7 @@ class welcome1 extends Component {
 
                 <Modal.Footer>
                     <button className="btn btn-success" onClick={this.signin}>Sign In </button>
-                    {this.state.valid && <p class="alert alert-danger" role="alert">wrong username or password</p>}
+                    {this.state.valid && <p class="alert alert-danger" role="alert">user not confirmed yet</p>}
                     
                 </Modal.Footer>
                 </Modal>

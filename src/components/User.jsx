@@ -8,6 +8,7 @@ import CompareSectorAndCompany from './Userview/CompareSectorAndCompany';
 import IPO from './Userview/IPO';
 import LatestStockPrice from './Userview/LatestStockPrice';
 import UserProfile from './Userview/UserProfile';
+import welcome1 from './welcome1';
 
 
 
@@ -17,11 +18,17 @@ class User extends Component {
 
         this.state = {
 
+          token: this.props.match.params.token,
           id: this.props.match.params.id
             
         }
 
       }
+    
+    welcomepage(){
+        this.props.history.push('/');
+    }
+
     
     render() {
         return (
@@ -41,13 +48,13 @@ class User extends Component {
         <Navbar.Collapse>
           <Nav>
             
-            <Nav.Link as={Link} to={"/sharelists"}>Latest Shares</Nav.Link>
-            <Nav.Link as={Link} to={"/ipos"}>IPOs</Nav.Link>
-            <Nav.Link as={Link} to={"/comparecompanies"}>Compare Company</Nav.Link>
-            <Nav.Link as={Link} to={"/comparesectors"}>Compare Sector</Nav.Link>
-            <Nav.Link as={Link} to={"/comparesectorandcompany"}>Compare Sector And Company</Nav.Link>
-            <Button as={Link} to={"/viewprofile/"+this.state.id}variant="outline-light" size='sm' style={{marginLeft : "80px"}} >Profile</Button>
-            <Button as={Link} to={"/"}variant="outline-light" size='sm' style={{marginLeft : "10px"}} >logout</Button>
+            <Nav.Link as={Link} to={"/sharelists/"+this.state.token}>Latest Shares</Nav.Link>
+            <Nav.Link as={Link} to={"/ipos/"+this.state.token}>IPOs</Nav.Link>
+            <Nav.Link as={Link} to={"/comparecompanies/"+this.state.token}>Compare Company</Nav.Link>
+            <Nav.Link as={Link} to={"/comparesectors/"+this.state.token}>Compare Sector</Nav.Link>
+            <Nav.Link as={Link} to={"/comparesectorandcompany/"+this.state.token}>Compare Sector And Company</Nav.Link>
+            <Button as={Link} to={"/viewprofile/"+this.state.id+"/"+this.state.token}variant="outline-light" size='sm' style={{marginLeft : "80px"}} >Profile</Button>
+            <Button variant="outline-light" size='sm' style={{marginLeft : "10px"}} onClick={this.welcomepage.bind(this)} >logout</Button>
 
           </Nav>
         </Navbar.Collapse>
@@ -57,13 +64,15 @@ class User extends Component {
       </div>
       <div>
       <Switch>
-      <Route path = "/comparecompanies" component = {CompareCompany}></Route>
-      <Route path = "/ipos" component = {IPO}></Route>
-      <Route path = "/sharelists" component = {LatestStockPrice}></Route>
-      <Route path = "/companydetails/:companyName/:stockExchangeName" component = {CompanyDetails}></Route>
-      <Route path = "/comparesectors" component = {CompareSector}></Route> 
-      <Route path = "/comparesectorandcompany" component = {CompareSectorAndCompany}></Route> 
-      <Route path = "/viewprofile/:id" component = {UserProfile}></Route>
+      <Route path = "/comparecompanies/:token" component = {CompareCompany}></Route>
+      <Route path = "/ipos/:token" component = {IPO}></Route>
+      <Route path = "/sharelists/:token" component = {LatestStockPrice}></Route>
+      <Route path = "/companydetails/:companyName/:stockExchangeName/:token" component = {CompanyDetails}></Route>
+      <Route path = "/comparesectors/:token" component = {CompareSector}></Route> 
+      <Route path = "/comparesectorandcompany/:token" component = {CompareSectorAndCompany}></Route> 
+      <Route path = "/viewprofile/:id/:token" component = {UserProfile}></Route>
+
+      
             
       </Switch>
       </div>

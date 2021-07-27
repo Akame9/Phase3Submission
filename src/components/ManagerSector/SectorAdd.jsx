@@ -6,7 +6,7 @@ class SectorAdd extends Component {
         super(props)
 
         this.state = {
-            
+            token: this.props.match.params.token,
             sectorName: '',
             sectorBrief: ''
         }
@@ -24,7 +24,7 @@ class SectorAdd extends Component {
     }
 
     cancel(){
-        this.props.history.push('/sectorlists');
+        this.props.history.push('/sectorlists/'+this.state.token);
     }
 
     save = (e) => {
@@ -34,8 +34,8 @@ class SectorAdd extends Component {
                 };
         console.log('s => ' + JSON.stringify(s));
 
-        Sectorservice.addse(s).then(res => {
-            this.props.history.push('/sectorlists');
+        Sectorservice.addse(s,this.state.token).then(res => {
+            this.props.history.push('/sectorlists/'+this.state.token);
         });
     }
 

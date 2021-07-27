@@ -7,6 +7,7 @@ class CompanyLists extends Component {
         super(props)
 
         this.state = {
+                token: this.props.match.params.token, 
                 companies: []
         }
 
@@ -16,22 +17,22 @@ class CompanyLists extends Component {
       }
 
     componentDidMount(){
-        Companyservices.getcompany().then((res) => {
+        Companyservices.getcompany(this.state.token).then((res) => {
             this.setState({ companies: res.data});
         });
     }
 
     addCompany(){
-        this.props.history.push('/add-company/_add');
+        this.props.history.push('/add-company/_add/'+this.state.token);
     }
 
     updateCompany(id){
-        this.props.history.push(`/add-company/${id}`);
+        this.props.history.push(`/add-company/${id}/`+this.state.token);
 
     }
 
     deleteCompany(id){
-        this.props.history.push(`/delete-company/${id}`);
+        this.props.history.push(`/delete-company/${id}/`+this.state.token);
 
     }
 

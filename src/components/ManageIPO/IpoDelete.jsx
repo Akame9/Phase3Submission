@@ -7,7 +7,7 @@ class IpoDelete extends Component {
         super(props)
 
         this.state = {
-            
+            token: this.props.match.params.token,
             id: this.props.match.params.id
          }
 
@@ -16,8 +16,8 @@ class IpoDelete extends Component {
 
 
     delete(ipoId){
-        Iposervices.deleteipo(ipoId).then(res =>{
-            this.props.history.push('/ipolists');
+        Iposervices.deleteipo(ipoId,this.state.token).then(res =>{
+            this.props.history.push('/ipolists/'+this.state.token);
         });
     }
     render() {

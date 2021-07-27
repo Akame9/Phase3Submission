@@ -7,20 +7,21 @@ class SectorLists extends Component {
         super(props)
 
         this.state = {
-                se: []
+            token: this.props.match.params.token,
+            se: []
         }
 
         this.addse = this.addse.bind(this);
       }
 
       componentDidMount(){
-        Sectorservice.getse().then((res) => {
+        Sectorservice.getse(this.state.token).then((res) => {
             this.setState({ se: res.data});
         });
     }
 
     addse(){
-        this.props.history.push('/add-sector');
+        this.props.history.push('/add-sector/'+this.state.token);
     }
 
 

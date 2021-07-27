@@ -9,6 +9,7 @@ class LatestStockPrice extends Component {
         super(props)
 
         this.state = {
+            token: this.props.match.params.token,
             lsp: [],
             search: '',
             companylist: []
@@ -22,7 +23,7 @@ class LatestStockPrice extends Component {
     }
 
     componentDidMount(){
-        Stockpriceservices.getlatestsp().then(res => {
+        Stockpriceservices.getlatestsp(this.state.token).then(res => {
             console.log(res);
             this.setState({lsp:res.data});
             res.data.forEach((value, key) => {
@@ -35,7 +36,7 @@ class LatestStockPrice extends Component {
     }
 
     companydetails(companyName,stockExchangeName){
-        this.props.history.push(`/companydetails/${companyName}/${stockExchangeName}`);
+        this.props.history.push(`/companydetails/${companyName}/${stockExchangeName}/`+this.state.token);
 
     }
 
@@ -46,7 +47,7 @@ class LatestStockPrice extends Component {
     
     searchForCompany = (e) => {
         e.preventDefault();
-        Companyservices.getlateststockpriceforcompany(this.state.search).then(res =>{
+        Companyservices.getlateststockpriceforcompany(this.state.search,this.state.token).then(res =>{
             this.setState({lsp:res.data})
         });
     }

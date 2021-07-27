@@ -23,10 +23,16 @@ class Admin extends Component {
         super(props)
 
         this.state = {
+
+          token: this.props.match.params.token
             
         }
 
       }
+
+    welcomepage(){
+        this.props.history.push('/');
+    }
 
     render() {
         return (
@@ -46,13 +52,13 @@ class Admin extends Component {
         <Navbar.Collapse>
           <Nav>
             
-            <Nav.Link as={Link} to={"/uploaddata"}>Import Data</Nav.Link>
-            <Nav.Link as={Link} to={"/companylists"}>Manage Company</Nav.Link>
-            <Nav.Link as={Link} to={"/selists"}>Manage Stock Exchange</Nav.Link>
-            <Nav.Link as={Link} to={"/ipolists"}>Manage IPO</Nav.Link>
-            <Nav.Link as={Link} to={"/sectorlists"}>Manage Sector</Nav.Link>
-            <Nav.Link as={Link} to={"/setstockcode"}>Stock Code</Nav.Link>
-            <Button as={Link} to={"/"}variant="outline-light" size='sm' style={{marginLeft : "100px"}}>logout</Button>
+            <Nav.Link as={Link} to={"/uploaddata/"+this.state.token}>Import Data</Nav.Link>
+            <Nav.Link as={Link} to={"/companylists/"+this.state.token}>Manage Company</Nav.Link>
+            <Nav.Link as={Link} to={"/selists/"+this.state.token}>Manage Stock Exchange</Nav.Link>
+            <Nav.Link as={Link} to={"/ipolists/"+this.state.token}>Manage IPO</Nav.Link>
+            <Nav.Link as={Link} to={"/sectorlists/"+this.state.token}>Manage Sector</Nav.Link>
+            <Nav.Link as={Link} to={"/setstockcode/"+this.state.token}>Stock Code</Nav.Link>
+            <Button variant="outline-light" size='sm' style={{marginLeft : "100px"}} onClick={this.welcomepage.bind(this)} >logout</Button>
           </Nav>
         </Navbar.Collapse>
 
@@ -61,23 +67,23 @@ class Admin extends Component {
       </div>
       <div>
       <Switch>
-        <Route path="/uploaddata"><SheetJSApp/></Route>
+        <Route path="/uploaddata/:token" component = {SheetJSApp}></Route>
 
-        <Route path = "/ipolists" component = {IpoLists}></Route>
-        <Route path = "/add-ipo/:id" component = {IpoAddOrUpdate}></Route>
-        <Route path = "/delete-ipo/:id" component = {IpoDelete}></Route>
+        <Route path = "/ipolists/:token" component = {IpoLists}></Route>
+        <Route path = "/add-ipo/:id/:token" component = {IpoAddOrUpdate}></Route>
+        <Route path = "/delete-ipo/:id/:token" component = {IpoDelete}></Route>
 
-        <Route path = "/companylists" component = {CompanyLists}></Route>
-        <Route path = "/add-company/:id" component = {CompanyAddOrUpdate}></Route>
-        <Route path = "/delete-company/:id" component = {CompanyDelete}></Route>
+        <Route path = "/companylists/:token" component = {CompanyLists}></Route>
+        <Route path = "/add-company/:id/:token" component = {CompanyAddOrUpdate}></Route>
+        <Route path = "/delete-company/:id/:token" component = {CompanyDelete}></Route>
 
-        <Route path = "/selists" component = {StockExchangeLists}></Route>
-        <Route path = "/add-se" component = {StockExchangeAdd}></Route>
+        <Route path = "/selists/:token" component = {StockExchangeLists}></Route>
+        <Route path = "/add-se/:token" component = {StockExchangeAdd}></Route>
 
-        <Route path = "/setstockcode" component = {SetStockCode}></Route>
+        <Route path = "/setstockcode/:token" component = {SetStockCode}></Route>
         
-        <Route path = "/sectorlists" component = {SectorLists}></Route>
-        <Route path = "/add-sector" component = {SectorAdd}></Route>
+        <Route path = "/sectorlists/:token" component = {SectorLists}></Route>
+        <Route path = "/add-sector/:token" component = {SectorAdd}></Route>
                     
                           
       </Switch>

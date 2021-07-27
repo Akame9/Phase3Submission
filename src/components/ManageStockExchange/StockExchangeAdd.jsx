@@ -8,7 +8,7 @@ class StockExchangeAdd extends Component {
         super(props)
 
         this.state = {
-            
+            token: this.props.match.params.token,
             stockExchangeName: '',
             stockExchangeBrief: ''
         }
@@ -26,7 +26,7 @@ class StockExchangeAdd extends Component {
     }
 
     cancel(){
-        this.props.history.push('/selists');
+        this.props.history.push('/selists/'+this.state.token);
     }
 
     save = (e) => {
@@ -36,8 +36,8 @@ class StockExchangeAdd extends Component {
                 };
         console.log('s => ' + JSON.stringify(s));
 
-        SEservices.addse(s).then(res => {
-            this.props.history.push('/selists');
+        SEservices.addse(s,this.state.token).then(res => {
+            this.props.history.push('/selists/'+this.state.token);
         });
     }
 

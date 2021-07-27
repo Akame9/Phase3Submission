@@ -1,32 +1,57 @@
 import axios from 'axios';
 
-const IPO_API_BASE_URL = "https://aathiraspringbootphase3.herokuapp.com/ipocontroller";
+const IPO_API_BASE_URL = "http://localhost:8080";
+//const IPO_API_BASE_URL = "https://aathiraspringbootphase3.herokuapp.com";
 
 class Iposervices {
 
-    getipos(){
-        return axios.get(IPO_API_BASE_URL+"/listipo");
+    getipos(token){
+        return axios.get(IPO_API_BASE_URL+"/listipo",{
+            headers: {
+                "Authorization" : "Bearer "+token
+            }
+        });
     }
 
-    addipo(ipo){
-        return axios.post(IPO_API_BASE_URL+"/addipo", ipo);
+    addipo(ipo,token){
+        return axios.post(IPO_API_BASE_URL+"/addipo", ipo,{
+            headers: {
+                "Authorization" : "Bearer "+token
+            }
+        });
     }
 
-    updateipo(ipoId, newipo){
-        return axios.post(IPO_API_BASE_URL + "/updateipo/" + ipoId, newipo);
+    updateipo(ipoId, newipo,token){
+        return axios.post(IPO_API_BASE_URL + "/updateipo/" + ipoId, newipo,{
+            headers: {
+                "Authorization" : "Bearer "+token
+            }
+        });
     }
 
-    getIpoById(ipoId){
-        return axios.get(IPO_API_BASE_URL + '/getipobyid/' + ipoId);
+    getIpoById(ipoId,token){
+        return axios.get(IPO_API_BASE_URL + '/getipobyid/' + ipoId,{
+            headers: {
+                "Authorization" : "Bearer "+token
+            }
+        });
     }
 
 
-    deleteipo(ipoId){
-        return axios.delete(IPO_API_BASE_URL + '/deleteipo/' + ipoId);
+    deleteipo(ipoId,token){
+        return axios.delete(IPO_API_BASE_URL + '/deleteipo/' + ipoId,{
+            headers: {
+                "Authorization" : "Bearer "+token
+            }
+        });
     }
 
-    getipofromto(from,to){
-        return axios.get(IPO_API_BASE_URL+'/getipofromandto/'+from+'/'+to);
+    getipofromto(from,to, token){
+        return axios.get(IPO_API_BASE_URL+'/getipofromandto/'+from+'/'+to,{
+            headers: {
+                "Authorization" : "Bearer "+token
+            }
+        });
 
     }
 

@@ -39,7 +39,7 @@ class CompareSector extends Component {
         super(props)
 
         this.state = {
-            
+            token: this.props.match.params.token,
             sectorName: '',
             from:'',
             to:'',
@@ -93,7 +93,7 @@ class CompareSector extends Component {
     };
         console.log('sector => ' + JSON.stringify(sector));
 
-        Sectorservice.getsectorprice(sector.sectorName,sector.from,sector.to).then(res =>
+        Sectorservice.getsectorprice(sector.sectorName,sector.from,sector.to,this.state.token).then(res =>
         {
             console.log(res);
             let tempdata = [];

@@ -8,7 +8,7 @@ class CompanyDelete extends Component {
         super(props)
 
         this.state = {
-            
+            token: this.props.match.params.token,
             id: this.props.match.params.id
          }
 
@@ -17,8 +17,8 @@ class CompanyDelete extends Component {
 
 
     delete(companyId){
-        Companyservices.deleteCompany(companyId).then(res =>{
-            this.props.history.push('/companylists');
+        Companyservices.deleteCompany(companyId,this.state.token).then(res =>{
+            this.props.history.push('/companylists/'+this.state.token);
         });
     }
 

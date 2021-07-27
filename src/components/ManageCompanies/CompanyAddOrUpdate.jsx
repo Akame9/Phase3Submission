@@ -10,6 +10,7 @@ class CompanyAddOrUpdate extends Component {
 
         this.state = {
             
+            token: this.props.match.params.token,
             id: this.props.match.params.id,
             companyName: '',
             ceo: '',
@@ -33,7 +34,7 @@ class CompanyAddOrUpdate extends Component {
         if(this.state.id === '_add'){
             //return
         }else{
-            Companyservices.getCompanyById(this.state.id).then( (res) =>{
+            Companyservices.getCompanyById(this.state.id,this.state.token).then( (res) =>{
                 let company = res.data;
                 this.setState({
                     companyName: company.companyName, 
@@ -48,7 +49,7 @@ class CompanyAddOrUpdate extends Component {
             
         }
         
-        Sectorservice.getse().then(res =>{
+        Sectorservice.getse(this.state.token).then(res =>{
             console.log(res)
             this.setState({sector: res.data})
         })
@@ -81,7 +82,7 @@ class CompanyAddOrUpdate extends Component {
     }
     
     cancel(){
-        this.props.history.push('/companylists');
+        this.props.history.push('/companylists/'+this.state.token);
     }
 
     handleSelect = (e) => {
@@ -105,12 +106,12 @@ class CompanyAddOrUpdate extends Component {
 
         
         if(this.state.id == '_add'){
-            Companyservices.addcompany(company).then(res =>{
-                this.props.history.push('/companylists');
+            Companyservices.addcompany(company,this.state.token).then(res =>{
+                this.props.history.push('/companylists/'+this.state.token);
             });
         }else{
-            Companyservices.updatecompany(this.state.id,company).then( res => {
-                this.props.history.push('/companylists');
+            Companyservices.updatecompany(this.state.id,company,this.state.token).then( res => {
+                this.props.history.push('/companylists/'+this.state.token);
             });
         }
     }

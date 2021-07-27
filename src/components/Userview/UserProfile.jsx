@@ -8,6 +8,7 @@ class UserProfile extends Component {
         super(props)
 
         this.state = {
+            token: this.props.match.params.token,
             id: this.props.match.params.id,
             user: [],
             show : false
@@ -21,7 +22,7 @@ class UserProfile extends Component {
 
     componentDidMount(){
 
-        Userservices.getuser(this.state.id).then(res =>{
+        Userservices.getuser(this.state.id,this.state.token).then(res =>{
             this.setState({user: res.data})
         })
         
@@ -46,7 +47,7 @@ class UserProfile extends Component {
 
     updatePassword = (e) => {
         e.preventDefault();
-        Userservices.updateuser(this.state.id,this.state.user.password).then(res => {
+        Userservices.updateuser(this.state.id,this.state.user.password,this.state.token).then(res => {
             this.setState({user: res.data, show : false });
         });
 

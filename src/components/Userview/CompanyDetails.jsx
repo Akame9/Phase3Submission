@@ -25,7 +25,8 @@ const chartConfigs = {
         caption: "Trend Of the Company ",    //Set the chart caption
         xAxisName: "Dates (in yyyy-mm-dd)",           //Set the x-axis name
         yAxisName: "Share Prices (in Rs)",  //Set the y-axis name
-        theme: "fusion"                 //Set the theme for your chart
+        theme: "fusion",
+        labeldisplay: "rotate",                 //Set the theme for your chart
       },
       // Chart Data - from step 2
       data: []
@@ -39,6 +40,7 @@ class CompanyDetails extends Component {
         super(props)
 
         this.state = {
+            token: this.props.match.params.token,
             companyName: this.props.match.params.companyName,
             stockExchangeName: this.props.match.params.stockExchangeName,
             cmp: [],
@@ -50,20 +52,20 @@ class CompanyDetails extends Component {
     }
 
     componentDidMount(){
-        Companyservices.getbycompanyName(this.state.companyName).then(res => {
+        Companyservices.getbycompanyName(this.state.companyName,this.state.token).then(res => {
             console.log(res);
             this.setState({cmp:res.data});
         });
-        Companyservices.getcompanyipo(this.state.companyName).then(res =>{
+        Companyservices.getcompanyipo(this.state.companyName,this.state.token).then(res =>{
             console.log(res);
             this.setState({ipo:res.data});
         });
-        Companyservices.getcompanycse(this.state.companyName).then(res =>{
+        Companyservices.getcompanycse(this.state.companyName,this.state.token).then(res =>{
             console.log(res)
             this.setState({cse:res.data});
         });
 
-        Companyservices.getstockprice(this.state.companyName,this.state.stockExchangeName,"2016-01-01","2030-01-01").then(res =>
+        Companyservices.getstockprice(this.state.companyName,this.state.stockExchangeName,"2016-01-01","2030-01-01",this.state.token).then(res =>
             {
                 console.log(res);
                 this.state.chart.dataSource.data = [];
@@ -99,10 +101,10 @@ class CompanyDetails extends Component {
                 <Container style={{marginTop:'80px'}}>
                     <Row>
                         <Col xs={4}>
-                        <Card>
+                        <Card bg='dark' text='white'>
                             <Card.Header>{this.state.cmp.companyName}</Card.Header>
                             
-                            <Card.Text>
+                            <Card.Text style={{marginLeft:'10px'}}>
                             CEO : {this.state.cmp.ceo}<br/>
                             Board Of Directors : {this.state.cmp.boardOfDirectors}<br/>
                             Turnover : {this.state.cmp.turnover}<br/>
@@ -110,16 +112,17 @@ class CompanyDetails extends Component {
                             Sector : {this.state.cmp.sectorName}<br/>
                             </Card.Text>
                             
-                            <Card.Text>IPO : <br/>
+                            <Card.Text style={{marginLeft:'10px'}}>IPO : <br/>
                             Price Per Share : {this.state.ipo.pricePerShare}<br/>
                             Total Number Of Shares : {this.state.ipo.totalNumberOfShare}<br/>
                             Date : {this.state.ipo.date}<br/>
                             Time : {this.state.ipo.time}<br/>
                             </Card.Text>
                             
-                            <Card.Text>Listed In :</Card.Text>
-                            <Card.Text>
-                            {
+                            
+                            <Card.Text style={{marginLeft:'10px'}}>
+                            Listed In :
+                            {   
                                 this.state.cse.map(
                                     se =>
                                     <p>{se.stockExchangeName}</p>
@@ -131,7 +134,7 @@ class CompanyDetails extends Component {
                             </Card>
                         </Col>
 
-                        <Col>
+                        <Col xs={4}>
                         <Card>
                         <ReactFC {...chartConfigs} />
                         </Card>

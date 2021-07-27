@@ -7,6 +7,7 @@ class SetStockCode extends Component {
         super(props)
 
         this.state = {
+            token: this.props.match.params.token,
             sc: [],
             stockCode: '',
             companyName: '',
@@ -21,7 +22,7 @@ class SetStockCode extends Component {
     }
 
     componentDidMount(){
-        Setstockcodeservice.getsc().then(res => {
+        Setstockcodeservice.getsc(this.state.token).then(res => {
             console.log(res);
             this.setState({sc:res.data});
         });
@@ -47,7 +48,7 @@ class SetStockCode extends Component {
                 };
         console.log('s => ' + JSON.stringify(s));
 
-        Setstockcodeservice.addsc(s).then(res =>{
+        Setstockcodeservice.addsc(s,this.state.token).then(res =>{
             console.log(res);
             this.setState({
                 stockCode: '',
@@ -59,7 +60,7 @@ class SetStockCode extends Component {
     }
 
     getSC(){
-        Setstockcodeservice.getsc().then(res => {
+        Setstockcodeservice.getsc(this.state.token).then(res => {
             console.log(res);
             this.setState({sc:res.data});
         });

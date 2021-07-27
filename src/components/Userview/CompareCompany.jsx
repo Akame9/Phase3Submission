@@ -38,7 +38,7 @@ class CompareCompany extends Component {
         super(props)
 
         this.state = {
-            
+            token: this.props.match.params.token,
             companyName: '',
             stkex: '',
             from:'',
@@ -98,7 +98,7 @@ class CompareCompany extends Component {
                 };
         console.log('company => ' + JSON.stringify(company));
 
-        Companyservices.getstockprice(company.companyName,company.stkex,company.from,company.to).then(res =>
+        Companyservices.getstockprice(company.companyName,company.stkex,company.from,company.to,this.state.token).then(res =>
             {
                 console.log(res);
                 let tempdata = [];
@@ -143,7 +143,7 @@ class CompareCompany extends Component {
         return (
             <Container style={{marginTop:'80px'}}>
             <Row>
-            <Col>
+            <Col xs={5}>
                    <Card >
                             
                                 <h3 className='text-center'>Select Company</h3>
@@ -182,7 +182,7 @@ class CompareCompany extends Component {
                         
 
                 </Col>
-                <Col>
+                <Col xs={7}>
 
                    <Card>								
 								{chartConfigs.Chart}

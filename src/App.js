@@ -19,8 +19,8 @@ function App() {
                           <Route path = "/" exact component = {welcome1}></Route>
                           <Route path = "/signup" exact component = {SignUp}></Route>
                           <Route path = "/signin" exact component = {Login}></Route>
-                          <Route path = "/user/:id" exact component = {User}></Route>
-                          <Route path = "/admin" component = {Admin}></Route>
+                          <Route path = "/user/:id/:token" exact component = {User}></Route>
+                          <Route path = "/admin/:token" component = {Admin}></Route>
                              
                     </Switch>
                   

@@ -7,7 +7,7 @@ class IpoAddOrUpdate extends Component {
         super(props)
 
         this.state = {
-            
+            token: this.props.match.params.token,
             id: this.props.match.params.id,
             companyName: '',
             pricePerShare: '',
@@ -28,7 +28,7 @@ class IpoAddOrUpdate extends Component {
         if(this.state.id === '_add'){
             return
         }else{
-            Iposervices.getIpoById(this.state.id).then( (res) =>{
+            Iposervices.getIpoById(this.state.id,this.state.token).then( (res) =>{
                 let ipo = res.data;
                 this.setState({
                     companyName: ipo.companyName,
@@ -61,7 +61,7 @@ class IpoAddOrUpdate extends Component {
     }
 
     cancel(){
-        this.props.history.push('/ipolists');
+        this.props.history.push('/ipolists/'+this.state.token);
     }
 
     saveOrUpdateIpo = (e) => {
@@ -76,12 +76,12 @@ class IpoAddOrUpdate extends Component {
 
         
         if(this.state.id === '_add'){
-            Iposervices.addipo(ipo).then(res =>{
-                this.props.history.push('/ipolists');
+            Iposervices.addipo(ipo,this.state.token).then(res =>{
+                this.props.history.push('/ipolists/'+this.state.token);
             });
         }else{
-            Iposervices.updateipo(this.state.id,ipo).then( res => {
-                this.props.history.push('/ipolists');
+            Iposervices.updateipo(this.state.id,ipo,this.state.token).then( res => {
+                this.props.history.push('/ipolists/'+this.state.token);
             });
         }
     }

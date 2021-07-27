@@ -9,9 +9,10 @@ class IPO extends Component {
         super(props)
 
         this.state = {
-                ipos: [],
-                from: '',
-                to: ''
+            token: this.props.match.params.token,
+            ipos: [],
+            from: '',
+            to: ''
         }
 
         this.changefromHandler = this.changefromHandler.bind(this);
@@ -22,7 +23,7 @@ class IPO extends Component {
 
     componentDidMount(){
         if(this.state.from.length==0 || this.state.to.length==0 ){
-            Iposervices.getipos().then((res) => {
+            Iposervices.getipos(this.state.token).then((res) => {
                 //console.log('Hello')
                 this.setState({ ipos: res.data});
             });
@@ -43,7 +44,7 @@ class IPO extends Component {
         e.preventDefault();
         
         
-        Iposervices.getipofromto(this.state.from,this.state.to).then(res =>{
+        Iposervices.getipofromto(this.state.from,this.state.to,this.state.token).then(res =>{
             console.log(res)
             this.setState({ ipos: []});
             this.setState({ ipos: res.data});

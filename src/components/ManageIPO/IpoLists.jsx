@@ -7,7 +7,8 @@ class IpoLists extends Component {
         super(props)
 
         this.state = {
-                ipos: []
+            token: this.props.match.params.token,
+            ipos: []
         }
 
         this.addIpo = this.addIpo.bind(this);
@@ -16,21 +17,21 @@ class IpoLists extends Component {
       }
 
     componentDidMount(){
-        Iposervices.getipos().then((res) => {
+        Iposervices.getipos(this.state.token).then((res) => {
             this.setState({ ipos: res.data});
         });
     }
 
     addIpo(){
-        this.props.history.push('/add-ipo/_add');
+        this.props.history.push('/add-ipo/_add/'+this.state.token);
     }
 
     updateIpo(id){
-        this.props.history.push(`/add-ipo/${id}`);
+        this.props.history.push(`/add-ipo/${id}/`+this.state.token);
     }
 
     deleteIpo(id){
-        this.props.history.push(`/delete-ipo/${id}`);
+        this.props.history.push(`/delete-ipo/${id}/`+this.state.token);
     }
 
     render() {

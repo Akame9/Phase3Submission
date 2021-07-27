@@ -14,6 +14,7 @@ export default class SheetJSApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: this.props.match.params.token,
       data: [] /* Array of Arrays e.g. [["a","b"],[1,2]] */,
       cols: [] /* Array of column objects e.g. { name: "C", K: 2 } */
     };
@@ -58,7 +59,7 @@ export default class SheetJSApp extends React.Component {
           sharePrice: this.state.data[i][2].trim(),
           date: this.state.data[i][3].trim(),
           time: this.state.data[i][4].trim()
-        }))
+        }),this.state.token)
         
 
       }

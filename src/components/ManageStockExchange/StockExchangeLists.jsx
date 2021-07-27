@@ -8,20 +8,21 @@ class StockExchangeLists extends Component {
         super(props)
 
         this.state = {
-                se: []
+            token: this.props.match.params.token,
+            se: []
         }
 
         this.addse = this.addse.bind(this);
       }
 
       componentDidMount(){
-        SEservices.getse().then((res) => {
+        SEservices.getse(this.state.token).then((res) => {
             this.setState({ se: res.data});
         });
     }
 
     addse(){
-        this.props.history.push('/add-se');
+        this.props.history.push('/add-se/'+this.state.token);
     }
 
     render() {
