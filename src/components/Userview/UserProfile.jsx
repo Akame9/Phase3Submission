@@ -55,10 +55,10 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <Card style={{marginTop:"100px",width:"18rem"}}>
-                <Card.Text>Username : {this.state.user.username}</Card.Text>
-                <Card.Text>Password : {this.state.user.password}</Card.Text>
-                <Card.Text>EmailId : {this.state.user.email}</Card.Text>
+            <Card style={{marginLeft:"20px",marginTop:"100px",width:"18rem"}}>
+                <Card.Text style={{marginLeft:"10px"}}>Username : {this.state.user.username}</Card.Text>
+                <Card.Text style={{marginLeft:"10px"}}>Password : {this.state.user.password}</Card.Text>
+                <Card.Text style={{marginLeft:"10px"}}>EmailId : {this.state.user.email}</Card.Text>
                 <Button onClick={this.handleShow.bind(this)}>Change Password</Button>
                 
 
