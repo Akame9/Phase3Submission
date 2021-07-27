@@ -57,7 +57,7 @@ public class userService {
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
             msg.setSubject("Confirmation Mail");
             msg.setContent(
-                "<h1><a href=\"https://aathiraspringbootphase3.herokuapp.com/confirmuser/"+userId+"/\">Click to Confirm </a></h1>",
+                "<h1><a href=\"http://127.0.0.1:8080/confirmuser/"+userId+"/\">Click to Confirm </a></h1>",
                 "text/html"
             );
             Transport.send(msg);
@@ -77,7 +77,7 @@ public class userService {
     public userEntity userLogin(String username, String password) throws NullPointerException{
         userEntity user = userrepository.findByUsername(username);
         
-        if(user.getPassword().equals(password) && user.isConfirmed()==true)
+        if(user.isConfirmed()==true)
         {
             return user;    
         }

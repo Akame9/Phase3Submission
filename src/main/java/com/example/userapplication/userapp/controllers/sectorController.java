@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class sectorController {
 

@@ -19,8 +19,16 @@ public class userEntity {
     private String email;
     private boolean confirmed;
     private boolean admin;
+    private String role;
     
 
+    
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
     public long getId() {
         return id;
     }
@@ -61,11 +69,10 @@ public class userEntity {
     public userEntity(){
         
     }
-    public userEntity(String username, String password, String email, boolean admin) {
+    public userEntity(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-    
     }
 
     

@@ -5,11 +5,11 @@ import javax.mail.internet.AddressException;
 
 import com.example.userapplication.userapp.model.companyEntity;
 import com.example.userapplication.userapp.model.userEntity;
-import com.example.userapplication.userapp.services.companyServices;
 import com.example.userapplication.userapp.services.userService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
+//import org.springframework.web.servlet.ModelAndView;
 
-@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class userController {
 
     @Autowired
     private userService userservice;
-    //@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+    
+    @Autowired
+	private PasswordEncoder bcryptEncoder;
 
 
     @RequestMapping(value = "/signup",method = RequestMethod.POST)
@@ -34,9 +36,13 @@ public class userController {
 
         String ADMIN_USERNAME = "Admin";
         String ADMIN_PASSWORD = "admin";
+        user.setRole("user");
+        
         if(user.getUsername().equals(ADMIN_USERNAME) && user.getPassword().equals(ADMIN_PASSWORD)){
             user.setAdmin(true);
+            user.setRole("admin");
         }
+        user.setPassword(bcryptEncoder.encode(user.getPassword()));
         userservice.createNewUser(user);
 
         HttpHeaders headers = new HttpHeaders();
@@ -49,19 +55,19 @@ public class userController {
 
 
     @RequestMapping(value = "/confirmuser/{userId}",method = RequestMethod.GET)
-    public ModelAndView welcomePage(@PathVariable Long userId ){
+    public String welcomePage(@PathVariable Long userId ){
 
         userservice.confirmed(userId);
-        String uri = "https://aathiraphase3reactfrontend.herokuapp.com/user/"+userId;
-        return new ModelAndView("redirect:"+uri);
+        //String uri = "http://localhost:3000/user/"+userId;
+        return "Thanks for comfirming please login to continue...";
 	    
 	    
     }
 
-    @CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
     @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.GET)
     public userEntity login(@PathVariable("username") String username,
     @PathVariable("password") String password){
+        
         userEntity registered = userservice.userLogin(username, password);
         return registered;
     }
@@ -73,16 +79,17 @@ public class userController {
     }
     */
 
-    @RequestMapping(value = "/searchbycompany/{companyName}",method = RequestMethod.GET)
+    /*@RequestMapping(value = "/searchbycompany/{companyName}",method = RequestMethod.GET)
     @ResponseBody
     public String searchByCompany(@PathVariable String companyName){
 
-        String uri = "https://aathiraspringbootphase3.herokuapp.com/companydetails/"+companyName;
+        String uri = "http://localhost:8080/companydetails/"+companyName;
 	    RestTemplate restTemplate = new RestTemplate();
 	    String result = restTemplate.getForObject(uri, String.class);
+        
 	    return result;
         
-    }
+    }*/
 
     /*@RequestMapping(value = "/viewipo",method = RequestMethod.GET)
     public String viewIpo(){

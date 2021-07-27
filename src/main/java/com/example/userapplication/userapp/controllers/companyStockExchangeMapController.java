@@ -6,7 +6,9 @@ import java.util.List;
 import com.example.userapplication.userapp.model.companyEntity;
 import com.example.userapplication.userapp.model.companyStockExchangeMap;
 import com.example.userapplication.userapp.model.stockExchange;
+import com.example.userapplication.userapp.services.companyServices;
 import com.example.userapplication.userapp.services.companyStockExchangeMapServices;
+import com.example.userapplication.userapp.services.stockExchangeServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +22,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class companyStockExchangeMapController {
 
     @Autowired
     private companyStockExchangeMapServices cseservices;
 
+    @Autowired
+    private companyServices cmpservices;
+
+    @Autowired
+    private stockExchangeServices stkservices;
+    
+
     @RequestMapping(value = "/insertcse",method = RequestMethod.POST)
     public ResponseEntity<Object> insertcse(@RequestBody companyStockExchangeMap cse){
 
         
-        String cmpuri = "https://aathiraspringbootphase3.herokuapp.com/companydetails/"+cse.getCompanyName();
+        /*String cmpuri = "http://localhost:8080/companydetails/"+cse.getCompanyName();
 	    RestTemplate cmprestTemplate = new RestTemplate();
 	    companyEntity company = cmprestTemplate.getForObject(cmpuri, companyEntity.class);
+        */
+        companyEntity company = cmpservices.companyInfo(cse.getCompanyName());
         cse.setCompany(company);
 
-        String stkuri = "https://aathiraspringbootphase3.herokuapp.com/getstockexchange/"+cse.getStockExchangeName();
-	    RestTemplate stkrestTemplate = new RestTemplate();
-	    stockExchange stockexchange = stkrestTemplate.getForObject(stkuri, stockExchange.class);
+        stockExchange stockexchange = stkservices.InfostockExchange(cse.getStockExchangeName());
         cse.setStockExchange(stockexchange);
         
         cseservices.addcse(cse);

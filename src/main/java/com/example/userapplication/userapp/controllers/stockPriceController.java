@@ -6,7 +6,10 @@ import java.sql.Date;
 import java.util.List;
 
 import com.example.userapplication.userapp.model.companyEntity;
+import com.example.userapplication.userapp.model.companyStockExchangeMap;
 import com.example.userapplication.userapp.model.stockPrice;
+import com.example.userapplication.userapp.services.companyServices;
+import com.example.userapplication.userapp.services.companyStockExchangeMapServices;
 import com.example.userapplication.userapp.services.stockPriceServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,25 +24,33 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class stockPriceController {
 
     @Autowired
     private stockPriceServices stockpriceservices;
 
+    @Autowired
+    private companyServices cmpservices;
+
+    @Autowired
+    private companyStockExchangeMapServices cseservices;
+
     @RequestMapping(value = "/insertstockprice", method = RequestMethod.POST)
     public ResponseEntity<Object> insertStockPrice(@RequestBody stockPrice stockprice){
         
         
-        String uri = "https://aathiraspringbootphase3.herokuapp.com/getcsecompanyName/"+stockprice.getStockCode();
+        /*String uri = "http://localhost:8080/getcsecompanyName/"+stockprice.getStockCode();
 	    RestTemplate restTemplate = new RestTemplate();
-	    String companyName = restTemplate.getForObject(uri, String.class);
-       
-        String cmpuri = "https://aathiraspringbootphase3.herokuapp.com/companydetails/"+companyName;
+	    String companyName = restTemplate.getForObject(uri, String.class);*/
+        String companyName = cseservices.getcseCompanyName(stockprice.getStockCode());
+        
+        /*String cmpuri = "http://localhost:8080/companydetails/"+companyName;
 	    RestTemplate cmprestTemplate = new RestTemplate();
 	    companyEntity company = cmprestTemplate.getForObject(cmpuri, companyEntity.class);
-        
+        */
+        companyEntity company = cmpservices.companyInfo(companyName);
         stockprice.setCompany(company);
         stockpriceservices.addStockPrice(stockprice);
 

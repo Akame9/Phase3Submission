@@ -7,8 +7,10 @@ import java.util.List;
 import com.example.userapplication.userapp.model.companyEntity;
 import com.example.userapplication.userapp.model.ipoDetails;
 import com.example.userapplication.userapp.model.stockExchange;
+import com.example.userapplication.userapp.services.companyServices;
 import com.example.userapplication.userapp.services.companyStockExchangeMapServices;
 import com.example.userapplication.userapp.services.ipoServices;
+import com.example.userapplication.userapp.services.stockExchangeServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,8 +25,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/ipocontroller/")
-@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+//@RequestMapping("/ipocontroller/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ipoController {
 
     @Autowired
@@ -33,22 +35,30 @@ public class ipoController {
     @Autowired
     private companyStockExchangeMapServices cseservices;
 
+    @Autowired
+    private companyServices cmpservices;
+
+    @Autowired
+    private stockExchangeServices stkservices;
+    
+
 
     @RequestMapping(value = "/addipo", method = RequestMethod.POST)
     public ResponseEntity<Object> addIpo(@RequestBody ipoDetails ipo){
 
-        String uri = "https://aathiraspringbootphase3.herokuapp.com/companydetails/"+ipo.getCompanyName();
+        /*String uri = "http://localhost:8080/companydetails/"+ipo.getCompanyName();
 	    RestTemplate restTemplate = new RestTemplate();
 	    companyEntity company = restTemplate.getForObject(uri, companyEntity.class);
-        //check for null company
+        
+        */
+        companyEntity company = cmpservices.companyInfo(ipo.getCompanyName());
         ipo.setCompany(company);
 
         
         List<String> stockexchangeName = cseservices.getStockExchangeByCompany(ipo.getCompanyName());
         for(String se : stockexchangeName){
-            String seuri = "https://aathiraspringbootphase3.herokuapp.com/getstockexchange/"+se;
-	        RestTemplate serestTemplate = new RestTemplate();
-	        stockExchange stke = serestTemplate.getForObject(seuri, stockExchange.class);
+            
+            stockExchange stke = stkservices.InfostockExchange(se);
             ipo.getStockexchange().add(stke);
 
         }
@@ -66,14 +76,14 @@ public class ipoController {
         return iposervices.showIpo();
     }
 
-    //@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+    
     @RequestMapping(value = "/deleteipo/{ipoId}",method = RequestMethod.DELETE)
     public void deleteIpo(@PathVariable Long ipoId){
         iposervices.deleteIpo(ipoId);
     }
 
 
-    //@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
+    
     @RequestMapping(value = "/updateipo/{ipoId}",method = RequestMethod.POST)
     public ResponseEntity<ipoDetails> updateIpo(@PathVariable Long ipoId,
     @RequestBody ipoDetails newipo){
