@@ -64,8 +64,8 @@ public class userService {
                 /*
         userEntity user = userrepository.getById(userId);
 
-        final String USERNAME = "aathirapillai31469@gmail.com";
-        final String PASSWORD = "athu@2021";
+        final String USERNAME = "";
+        final String PASSWORD = "";
         
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
