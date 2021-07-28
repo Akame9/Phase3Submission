@@ -43,7 +43,7 @@ public class userService {
             Email from = new Email("aathirapillai31469@gmail.com");
             String subject = "Sending with SendGrid is Fun";
             Email to = new Email(user.getEmail());
-            Content content = new Content("text/html", "<h1><a href =\"https://aathiraphase3reactfrontend.herokuapp.com/confirmuser/" + userId + "/\"> Click to confirm </a></h1>");
+            Content content = new Content("text/html", "<h1><a href =\"https://aathiraspringbootphase3.herokuapp.com/confirmuser/" + userId + "/\"> Click to confirm </a></h1>");
             Mail mail = new Mail(from, subject, to, content);
 
             SendGrid sg = new SendGrid("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");
