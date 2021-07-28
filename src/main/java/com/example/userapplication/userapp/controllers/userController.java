@@ -1,5 +1,7 @@
 package com.example.userapplication.userapp.controllers;
 
+import java.io.IOException;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 //import org.springframework.web.servlet.ModelAndView;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 //@CrossOrigin(origins = "https://aathiraphase3reactfrontend.herokuapp.com")
 @RestController
 public class userController {
@@ -33,7 +35,7 @@ public class userController {
 
 
     @RequestMapping(value = "/signup",method = RequestMethod.POST)
-    public userEntity signup(@RequestBody userEntity user) throws AddressException, MessagingException{
+    public userEntity signup(@RequestBody userEntity user) throws AddressException, MessagingException, IOException{
 
         String ADMIN_USERNAME = "Admin";
         String ADMIN_PASSWORD = "admin";

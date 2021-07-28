@@ -1,5 +1,6 @@
 package com.example.userapplication.userapp.services;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,6 +13,13 @@ import javax.mail.internet.MimeMessage;
 
 import com.example.userapplication.userapp.model.userEntity;
 import com.example.userapplication.userapp.repository.userRepository;
+import com.sendgrid.Content;
+import com.sendgrid.Email;
+import com.sendgrid.Mail;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +36,32 @@ public class userService {
     }
 
     //To send a confirmation mail to the user
-    public void sendconfirmationmail(Long userId) throws AddressException,MessagingException {
+    public void sendconfirmationmail(Long userId) throws AddressException,MessagingException, IOException {
+        
+            userEntity user = userrepository.getById(userId);
 
+            Email from = new Email("aathirapillai31469@gmail.com");
+            String subject = "Sending with SendGrid is Fun";
+            Email to = new Email(user.getEmail());
+            Content content = new Content("text/html", "<h1><a href =\"http://127.0.0.1:8080/confirmuser/" + userId + "/\"> Click to confirm </a></h1>");
+            Mail mail = new Mail(from, subject, to, content);
+
+            SendGrid sg = new SendGrid("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");
+            Request request = new Request();
+            try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sg.api(request);
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+            System.out.println(response.getHeaders());
+            } catch (Exception ex) {
+            throw ex;
+            }
+        }
+        
+                /*
         userEntity user = userrepository.getById(userId);
 
         final String USERNAME = "aathirapillai31469@gmail.com";
@@ -64,9 +96,9 @@ public class userService {
         }
         catch(MessagingException e){
             e.printStackTrace();
-        }
+        }*/
 
-    }
+    
 
     public void confirmed(Long userId){
         userEntity user = userrepository.getById(userId);
