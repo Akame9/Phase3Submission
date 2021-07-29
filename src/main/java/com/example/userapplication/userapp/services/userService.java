@@ -40,13 +40,13 @@ public class userService {
         
             userEntity user = userrepository.getById(userId);
 
-            Email from = new Email("aathirapillai31469@gmail.com");
+            Email from = new Email("");
             String subject = "Sending with SendGrid is Fun";
             Email to = new Email(user.getEmail());
             Content content = new Content("text/html", "<h1><a href =\"https://aathiraspringbootphase3.herokuapp.com/confirmuser/" + userId + "/\"> Click to confirm </a></h1>");
             Mail mail = new Mail(from, subject, to, content);
 
-            SendGrid sg = new SendGrid("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");
+            SendGrid sg = new SendGrid("");
             Request request = new Request();
             try {
             request.setMethod(Method.POST);
@@ -60,44 +60,6 @@ public class userService {
             throw ex;
             }
         }
-        
-                /*
-        userEntity user = userrepository.getById(userId);
-
-        final String USERNAME = "";
-        final String PASSWORD = "";
-        
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "465");
-        prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true");
-        prop.put("mail.smtp.starttls.required", "true");
-        prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        Session session = Session.getInstance(prop,
-            new javax.mail.Authenticator(){
-                protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
-                    return new javax.mail.PasswordAuthentication(USERNAME,PASSWORD);
-                }
-            });
-
-        try{
-
-            Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(USERNAME));
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
-            msg.setSubject("Confirmation Mail");
-            msg.setContent(
-                "<h1><a href=\"http://127.0.0.1:8080/confirmuser/"+userId+"/\">Click to Confirm </a></h1>",
-                "text/html"
-            );
-            Transport.send(msg);
-        }
-        catch(MessagingException e){
-            e.printStackTrace();
-        }*/
-
     
 
     public void confirmed(Long userId){
