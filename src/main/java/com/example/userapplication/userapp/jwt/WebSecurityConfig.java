@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/authenticate").permitAll().
 				//antMatchers("/setuserapi2").permitAll().
 				//antMatchers("/getuserapi").permitAll().
-				antMatchers("/register").permitAll().
+				//antMatchers("/register").permitAll().
                 antMatchers("/signup").permitAll().
                 antMatchers("/login/{username}/{password}/").permitAll().
                 antMatchers("/confirmuser/{userId}/").permitAll().

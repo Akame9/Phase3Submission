@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.userapplication.userapp.model.userEntity;
@@ -25,8 +25,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 	userRepository userrepo;
 
 
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
+	//@Autowired
+	//private PasswordEncoder bcryptEncoder;
 	
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 	       
@@ -53,7 +53,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 //implement without dto	public com.stockexchange.phase3.User1 save(UserDto user) {
-	public userEntity save(userEntity user) {
+	/*public userEntity save(userEntity user) {
 		userEntity newUser = new userEntity();
 		//newUser.setname(user.getUsername());
 		//newUser.setpassword(bcryptEncoder.encode(user.getPassword()));
@@ -64,7 +64,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	    newUser.setEmail(user.getEmail());
 		newUser.setRole(user.getRole());
 		return userrepo.save(newUser);
-	}
+	}*/
 
 
 

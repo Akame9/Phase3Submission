@@ -38,12 +38,12 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/register", method = RequestMethod.POST)
 	// without dto below public ResponseEntity<?> saveUser(@RequestBody UserDto user) throws Exception {
 	public ResponseEntity<?> saveUser(@RequestBody userEntity user) throws Exception {
 //USer1 is your user pojo entity 
 		return ResponseEntity.ok(userDetailsService.save(user));
-	}
+	}*/
 //if not using dto ,then for register name and not user name
 	//user username for authenticate but
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST,headers = "Accept=application/json")
