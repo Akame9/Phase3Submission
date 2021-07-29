@@ -2,15 +2,23 @@
 
 # STOCKMART : A Stock Market Charting Application
 
-Structure
+## Branch Description
 
-Main : Introduction 
-Feature : This branch contains the Spring Boot Application
-Master : This branch contains the React Application
+Main : Introduction and Screenshots of Heroku,Jenkin,Jmeter and Postman<br/> 
+Feature : This branch contains the Spring Boot Application<br/>
+Master : This branch contains the React Application<br/>
 
-Spring Boot Application Structure
+## Deployed Urls
 
-URL for Spring Boot Application : https://aathiraspringbootphase3.herokuapp.com/
-URL for React Application : https://aathiraphase3reactfrontend.herokuapp.com/
+Spring Boot Application : https://aathiraspringbootphase3.herokuapp.com/ <br/>
+React Application : https://aathiraphase3reactfrontend.herokuapp.com/ <br/>
 
-React Application Structure
+## How to Run the Application
+Signup/Login : 
+During signup a confirmation mail is send to the specified email id. <br/>
+Only after confirmation the user is allowed to login and proceed further.<br/>
+Admin credentials : <br/>
+username : Admin <br/>
+password : admin <br/>
+
+
